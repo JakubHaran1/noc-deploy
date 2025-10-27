@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+    <script type="module" src={% static "js/register.js" %}></script>
+{% endblock  %}
+
+
+{% block content %}
+
+    <div class="register-wrapper">
+
+        <div class="register-form">
+            <form enctype="multipart/form-data"  class="form" method="POST">
+                {% csrf_token %}
+                <div class="position">
+                    {{form.username.label_tag}}
+                    {{form.username}}
+                    {{form.username.errors}}
+                </div>
+                <div class="position">
+                    {{form.email.help_text}}
+                    {{form.email.label_tag}}
+                    {{form.email}}
+                    {{form.email.errors}}
+                </div>
+                 <div class="position">
+                    {{form.password1.help_text}}
+                    {{form.password1.label_tag}}
+                    {{form.password1}}
+                    {{form.password1.errors}}
+                </div>
+             
+                <div class="position">
+                    {{form.password2.label_tag}}
+                    <p>{{form.password2.help_text}}</p>
+                    {{form.password2}}
+                    {{form.password2.errors}}
+                </div>
+                <div class="position">
+                    <p>{{form.birth.help_text}}</p>
+                    {{form.birth.label_tag}}
+                    {{form.birth}}
+                    {{form.birth.errors}}
+                </div>
+                <div class="position file">
+                    <p>{{form.avatar.help_text}}</p>
+                    {{form.avatar.label_tag}}
+                    {{form.avatar}}
+                    {{form.avatar.errors}}
+                </div>
+                    <button class="signup-btn">Sign up</button>
+            </form>
+        </div>
+
+        <div class="register-img">
+        </div>
+    </div>
+   
+{% endblock  %}
+

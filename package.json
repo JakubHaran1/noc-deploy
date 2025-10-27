@@ -1,0 +1,23 @@
+{
+  "name": "nocturno",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "sass:base": "sass static/sass/base.scss  static/css/base.css --watch",
+    "django": "python manage.py runserver",
+    "dev": "concurrently \"npm run sass:base\" \"npm run django\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "sass": "^1.87.0"
+  },
+  "dependencies": {
+    "leaflet-providers": "^2.0.0",
+    "leaflet-spin": "^1.1.2",
+    "spin.js": "^4.1.2"
+  }
+}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+
+ {% block content %}
+ 
+  <div class="log-user">
+    <div class="login-wrapper">
+      <h2>Login</h2>
+      <p>Our events are for members only 👀👇</p>
+      {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+      {% endif %}
+      <form method="POST"class="form login-form ">
+          {% csrf_token %}
+          {% for field in form %}
+            <div class="position">
+              {{field.label_tag}}
+              {{field}}
+              {{field.errors}}
+            </div>
+          {% endfor %}
+
+          <div class="position reset-btn">
+            <a href={% url "reset-password" %}>Reset password</a>
+          </div>
+          <button class="signup-btn">Sign in</button>
+      </form>
+        
+    </div>   
+
+    <div class="new-register">
+      <h2>Sign up!</h2>
+      <p>🚨🚨 Join us to take part in the biggest events in Europe! 🚨🚨</p>
+      <a  href={% url "register" %}>Sign up</a>
+    </div>
+  </div>
+ 
+ {% endblock %}
+

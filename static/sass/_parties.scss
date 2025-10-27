@@ -1,0 +1,204 @@
+@use "./variables" as v;
+@use "./mixins" as m;
+
+.parties {
+  padding: 1rem;
+  border-radius: 5px;
+  -webkit-box-shadow: inset 0px 0px 16px 1px #0b0c10;
+  -moz-box-shadow: inset 0px 0px 16px 1px #0b0c10;
+  box-shadow: inset 0px 0px 16px 1px #0b0c10;
+
+  .row-parties {
+    scrollbar-color: v.$bg-section v.$bg-main;
+    overflow-x: scroll;
+
+    .parties_bgc {
+      display: flex;
+      gap: 1rem;
+      padding: 0 0 1rem;
+      will-change: transform;
+      transition: transform 0.5s;
+    }
+  }
+  .party-info {
+    width: 21rem;
+    padding: 1rem;
+    margin: 0 auto;
+    text-align: center;
+    color: v.$text-secondary;
+    background-color: #3a3459;
+    border-radius: 10px;
+
+    a {
+      text-decoration: none;
+      @include m.neon-button;
+      font-size: 0.8rem;
+      margin-top: 1rem;
+    }
+  }
+  .party {
+    width: 15rem;
+    justify-content: space-around;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    margin: 0 auto;
+    padding: 1rem;
+    margin-top: 1.25rem;
+    text-align: center;
+    background-color: #3a3459;
+    border-radius: 10px;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    -webkit-box-shadow: 0px 0px 37px -12px #0b0c10;
+    -moz-box-shadow: 0px 0px 37px -12px #0b0c10;
+    box-shadow: 0px 0px 37px -12px #0b0c10;
+
+    .date {
+      text-decoration: none;
+      letter-spacing: 3px;
+      margin-bottom: 0.5rem;
+      color: v.$text-secondary;
+    }
+    button {
+      margin-top: 1rem;
+    }
+    &:hover {
+      transform: translateY(-10px);
+      -webkit-box-shadow: 0px 0px 45px -10px #0b0c10;
+      -moz-box-shadow: 0px 0px 45px -10px #0b0c10;
+      box-shadow: 0px 0px 45px -10px #0b0c10;
+    }
+
+    .img-hero {
+      width: 100%;
+      aspect-ratio: 1/0.5;
+      background-position: center;
+      background-repeat: no-repeat;
+
+      max-height: 200px;
+
+      border-radius: 15px;
+    }
+
+    h4 {
+      margin: 0.8rem 0;
+      text-align: center;
+      word-break: break-word;
+      padding: 0 1rem;
+    }
+    .desc {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      text-align: center;
+      color: v.$text-main;
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+
+      p.description {
+        font-size: 1rem;
+        word-break: break-word;
+        color: v.$text-secondary;
+      }
+    }
+  }
+  a.show-users {
+    text-decoration: none;
+    color: #9b30ff;
+  }
+}
+
+.layout.map {
+  overflow: hidden;
+  .parties_bgc {
+    overflow: scroll;
+  }
+
+  .parties {
+    padding: 0;
+    scroll-behavior: smooth;
+    .party:first-child {
+      margin-left: 1rem;
+    }
+    .party:last-child {
+      margin-right: 1rem;
+    }
+
+    .party.active {
+      background-color: #4a3459;
+      transform: translateY(-10px);
+      -webkit-box-shadow: 0px 0px 45px -10px #0b0c10;
+      -moz-box-shadow: 0px 0px 45px -10px #0b0c10;
+      box-shadow: 0px 0px 45px -10px #0b0c10;
+    }
+  }
+}
+
+.main-party {
+  .user-party,
+  .popular-party {
+    padding: 0.75rem;
+    background-color: v.$bg-section;
+  }
+
+  .main-party {
+    margin: 0 2rem;
+  }
+}
+
+@media (min-width: 724px) {
+  .layout.map .parties_bgc {
+    overflow: auto;
+  }
+  .parties {
+    .row-parties {
+      overflow-x: hidden;
+    }
+  }
+}
+@media (min-width: 1200px) {
+  .layout.map {
+    .parties {
+      width: 30rem;
+      padding: 1.2rem;
+      background-color: #1f1d39;
+      height: 100vh;
+      overflow-y: scroll;
+      scrollbar-color: #1f1d39 #0b0c10;
+
+      .party:first-child {
+        margin: 1rem auto 0;
+      }
+      .party:last-child {
+        margin: 1rem auto 0;
+      }
+    }
+
+    .parties-wrapper {
+      box-shadow: inset 0px 0px 16px 1px #0b0c10;
+    }
+
+    .row-parties {
+      overflow-x: auto;
+      flex-direction: column;
+
+      .parties_bgc {
+        flex-direction: column;
+      }
+    }
+  }
+  .main-party {
+    .user-party,
+    .popular-party {
+      padding: 0.75rem;
+      background-color: v.$bg-section;
+      width: 80%;
+      margin: 1rem auto;
+
+      .party {
+        width: 15rem;
+      }
+    }
+  }
+}

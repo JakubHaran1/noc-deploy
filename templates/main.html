@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block head %}
+    <script type=module src={% static "js/main.js" %}></script>
+{% endblock  %}
+
+{% block content %} 
+
+    <section class="user-profile">
+        
+        <div class="user-card">
+           
+            
+            <div class="user-img">
+                <img src="{{request.user.avatar.url}}" alt="{{request.user.username}}'s profile image">
+            </div>
+
+            <div  iv class="user-info">
+                <div class="position">
+                    <h4>Name:</h4>
+                    <p>Nicolas</p>
+                </div>
+                <div class="position">
+                    <h4>Surname:</h4>
+                    <p>Cage</p>
+                </div>
+              
+            </div>
+            <div class="user-info">
+                <div class="position">
+                    <h4>Nick:</h4>
+                    <p>{{request.user.username}}</p>
+                </div>
+                <div class="position">
+                    <h4>Age:</h4>
+                    <p>{{request.user.return_age}}</p>
+                </div>
+            </div>
+
+            <div class="friends-actions">
+                <div class="acction">
+                    <a href={% url "buddies" %} class="link"></a>
+                    <i class="fas fa-user-friends"></i>
+                    <h4>Buddies</h4>
+                </div>
+                <div class="acction ">
+                    <a href="{% url "logout" %} " class="link"></a>
+                    <i class="fa-solid fa-arrow-right-from-bracket logout-btn"></i>
+                    <h4>Logout</h4>
+                </div>
+                  
+                
+               
+            </div>
+        </div>
+    </section>
+
+    <section class="main-party">
+        <div class="popular-party">
+            <div class="parties">
+                <h2>Your parties</h2>
+                {% if user_parties %}
+                    <div class="row-parties">
+                        <div class="parties_bgc" style="transform: translateX(0px);">
+                            {% for party in user_parties %}
+                                {% include "includes/parties.html" %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="party-info">
+                        <p>You have to create party! 🎶🫡</p>
+                        <a class="btn" href="{% url "map" %}">Create</a>
+                    </div>
+                {% endif %}
+             
+            </div>
+        </div>
+        <div class="user-party">
+            <div class="parties">
+                <h2>Joined parties</h2>
+                {% if participant_parties %}
+                    <div class="row-parties">
+                        <div class="parties_bgc" style="transform: translateX(0px);">
+                            {% for party in participant_parties %}
+                                
+                                {% include "includes/parties.html" %}
+                               
+                                
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% else %}
+                    
+                     <div class="party-info">
+                        <p>You have to join to some parties!🎉✨</p>
+                        <a class="btn" href="{% url "map" %}">Join!</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+
+
+{% endblock %}

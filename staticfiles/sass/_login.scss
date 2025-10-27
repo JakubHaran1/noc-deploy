@@ -1,0 +1,97 @@
+@use "./_variables" as v;
+@use "./_mixins" as m;
+
+.log-user {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 700px;
+  color: v.$text-secondary;
+  margin: 2rem 0;
+
+  h2 {
+    padding: 0.5rem 0;
+    text-align: center;
+  }
+  p {
+    margin: 0.5rem 0;
+    text-align: center;
+  }
+
+  button {
+    display: block;
+    margin: 2rem auto 1rem;
+  }
+
+  .messages {
+    text-align: center;
+    list-style: none;
+
+    .error {
+      color: crimson;
+    }
+  }
+}
+
+.login-wrapper {
+  width: 90%;
+  background-color: v.$bg-section-2;
+  padding: 1rem;
+  border-radius: 15px;
+
+  .position {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .login-form .position:nth-child(2) {
+    margin-bottom: 1rem;
+  }
+  .reset-btn {
+    margin-top: 0.5rem;
+    text-align: end;
+    a {
+      color: white;
+    }
+  }
+}
+
+.new-register {
+  text-align: center;
+  padding: 0 1rem;
+  margin: 0 1rem;
+  background-color: v.$bg-section-2;
+  border-radius: 15px;
+  max-width: 600px;
+  a {
+    margin: 1.5rem 0 0.5rem;
+    @include m.neon-button;
+    text-decoration: none;
+  }
+}
+
+@media (min-width: 361px) {
+  .log-user {
+    margin: 1rem 0;
+  }
+}
+
+@media (min-width: 410px) {
+  .log-user {
+    margin: 0;
+    p {
+      margin: 0.8rem 0;
+    }
+  }
+  .new-register {
+    padding: 1rem;
+  }
+}

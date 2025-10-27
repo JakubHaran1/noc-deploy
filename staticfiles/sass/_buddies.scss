@@ -1,0 +1,146 @@
+@use "./variables" as v;
+@use "./mixins" as m;
+
+.buddies-wrapper {
+  width: 95%;
+  min-height: 80vh;
+  margin: 1rem auto;
+  padding: 0.5rem;
+  background-color: v.$bg-section-2;
+  border-radius: 5px;
+}
+
+.search-wrapper {
+  padding: 1rem;
+  border-radius: 5px;
+  @include m.shadow;
+
+  label,
+  input {
+    display: block;
+  }
+
+  button {
+    @include m.neon-button;
+    display: block;
+    margin: 1rem auto;
+    width: 8rem;
+  }
+}
+
+.search-nav {
+  text-align: center;
+  margin-bottom: 1rem;
+  .search-link {
+    display: inline;
+    position: relative;
+    text-decoration: none;
+    color: white;
+    margin-right: 0.3rem;
+    cursor: pointer;
+
+    &:after {
+      content: "";
+      display: block;
+      width: 50%;
+      height: 2px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: transparent;
+      transition: background-color 0.3s;
+    }
+  }
+  .search-link:hover::after {
+    background-color: rgba(255, 255, 255, 0.253);
+  }
+  .search-link.active::after {
+    z-index: 1;
+    background-color: white;
+  }
+}
+
+.search-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  gap: 1.25rem;
+  margin-top: 2rem;
+  padding: 1rem;
+
+  .buddies-txt {
+    grid-column: 1/10;
+    align-self: center;
+    text-align: center;
+    margin-top: 4rem;
+    color: v.$text-secondary;
+    font-weight: bold0;
+    letter-spacing: 1.5px;
+    width: 80%;
+  }
+}
+
+.buddy-box {
+  width: 90%;
+  display: flex;
+  align-items: center;
+
+  gap: 1rem;
+  border-radius: 15px;
+  padding: 1rem 0.5rem;
+  -webkit-box-shadow: 0px 0px 45px -11px v.$bg-main;
+  -moz-box-shadow: 0px 0px 45px -11px v.$bg-main;
+  box-shadow: 0px 0px 45px -11px v.$bg-main;
+  h3 {
+    color: v.$text-secondary;
+  }
+
+  button {
+    width: 5rem;
+    font-size: 0.8rem;
+    padding: 0.25rem;
+    margin-top: 1rem;
+  }
+}
+
+@media (min-width: 500px) {
+  .search {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .search-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    .buddy-box {
+      width: 100%;
+    }
+  }
+}
+
+@media (min-width: 780px) {
+  .search {
+    width: 60%;
+  }
+  .search-row {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media (min-width: 1000px) {
+  .search {
+    width: 40%;
+  }
+  .search-row {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+@media (min-width: 1300px) {
+  .search {
+    width: 30%;
+  }
+  .search-row {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
+}

@@ -1,0 +1,69 @@
+@use "./variables" as v;
+@mixin header {
+  color: v.$text-secondary;
+  text-transform: uppercase;
+}
+
+@mixin neon-button {
+  display: inline-block;
+  position: relative;
+  padding: 0.5rem 0.5rem;
+  font-size: 16px;
+  color: #ffea00;
+  background: transparent;
+  border: 2px solid #ffea00;
+  border-radius: 6px;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 8px #ffea00;
+  font-weight: bold;
+  overflow: hidden;
+  z-index: 1;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffd900;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: -1;
+  }
+
+  &:hover::before {
+    opacity: 1;
+    box-shadow: 0 0 10px #ffd900, 0 0 20px #ffd900, 0 0 30px #ffd900;
+  }
+
+  &:hover {
+    color: v.$bg-section-2;
+    border-color: #ffd900;
+    text-shadow: none;
+  }
+}
+
+@mixin shadow {
+  -webkit-box-shadow: inset 0px 0px 16px 1px #0b0c10;
+  -moz-box-shadow: inset 0px 0px 16px 1px #0b0c10;
+  box-shadow: inset 0px 0px 16px 1px #0b0c10;
+}
+
+@mixin description {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  text-align: center;
+  color: v.$text-main;
+  font-size: 1.2rem;
+
+  p {
+    font-size: 1rem;
+    color: v.$text-secondary;
+  }
+}

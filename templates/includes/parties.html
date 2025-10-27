@@ -1,0 +1,27 @@
+{% load static %}
+
+<div class="party" >
+  <p class="date">{{party.date}}</p>
+  <div
+    class="img-hero"
+    style="background-image: url(media/{{party.file_thumb}})"></div>
+
+  <h4>{{party.party_title}}</h4>
+
+  <div class="desc">
+    <div class="el">
+      <i class="fas fa-wine-glass-alt"></i>
+      <p>{{party.alco}}</p>
+    </div>
+    <div class="el">
+      <i class="far fa-id-card"></i>
+      <p>{{party.age}}+</p>
+    </div>
+    <div class="el">
+      <i class="fas fa-users"></i>
+      <p>{{party.participants.all|length}}</p>
+    </div>
+  </div>
+    <a class="show-users" href="{% url "check_party" party_id=party.pk %}">Show users</a>
+    <a class="signup-btn" href="{% url "map" %}" id="{{party.pk}}">Check</a>
+</div>

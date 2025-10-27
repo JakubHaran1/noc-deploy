@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+{% block head %}
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <script type=module src={% static "js/check_list.js" %}></script>
+{% endblock  %}
+
+{% endblock  %}
+
+
+ {% block content %}
+ 
+    <section class="buddies-wrapper" >
+        
+        <div class="search-row">
+            {% for query in check_query%}
+
+                <div class="buddy-box">
+                    <img src="{% static "query.avatar" %}" alt="{{query.username}}">
+                    <div class="buddy-info">
+                        <h3 class='nick'>{{query.username}}</h3>
+                        
+                           
+                        {% if query.id in user_response%}
+                            <button class="delete-btn actionBtn" data-id="{{query.id}}" data-action="delete">delete</button>
+                        {% else%}
+                                <button class="signup-btn actionBtn" data-id="{{query.id}}" data-action="add">add</button>
+                        {% endif %}
+                      
+                    </div>
+                </div> 
+            
+            {% endfor %} 
+        </div>
+    </section>
+ 
+ {% endblock %}
+

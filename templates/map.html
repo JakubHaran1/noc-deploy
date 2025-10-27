@@ -1,0 +1,165 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <title>🧊 NOCTURNO 🧊</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/spin.js@2.3.2/spin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/makinacorpus/Leaflet.Spin/leaflet.spin.js"></script>
+
+    <script type=module src="{% static 'js/maps.js' %}"></script>
+    <link rel="stylesheet" href={% static "css/base.css" %}>
+  
+</head>
+<body>
+    <div class="layout map">
+        <div class="navbar nav-header ">
+            <h2 class="main-header"> Nocturno </h2>
+        </div>
+        <nav class="nav navbar">
+            <a href="{% url "home" %}" class="nav-el"><i class="fa-solid fa-house-chimney"></i></a>
+            <a href="{% url "map" %}" class="nav-el"><i class="fa-solid fa-location-dot"></i></a>
+        </nav> 
+        <section class="map-wrapper">
+            
+            <div id="map">
+                 <div class="navbar">
+                    <h2 class="main-header"> Nocturno </h2>
+                </div>
+                <nav class="nav navbar">
+                    <a href="{% url "home" %}" class="nav-el"><i class="fa-solid fa-house-chimney"></i></a>
+                    <a href="{% url "map" %}" class="nav-el"><i class="fa-solid fa-location-dot"></i></a>
+                </nav> 
+            </div>
+
+            <section class="parties">
+                <div class="party-creator {% if attempt == 1 %}attempt{% endif %}">
+                   <span class="close-creator"> <i class="fa-solid fa-xmark"></i></span>
+                    <h2 >Configure your party:</h2>
+                    <form method="POST" class="form form-creator" enctype="multipart/form-data" action="{% url "map" %}">
+                       
+                       {% csrf_token %}
+                        <div class="form-positions">                         
+                            <div class="position party_title static" >
+                                {{partyForm.party_title.label_tag}}
+                                {{partyForm.party_title}}
+                                {{partyForm.party_title.errors}}
+                            </div>
+                             <div class="position description-wrapper static" >
+                                {{partyForm.description.label_tag}}
+                                {{partyForm.description}}
+                                {{partyForm.description.errors}}
+                            </div>
+                             <div class="position date static" >
+                                {{partyForm.date.label_tag}}
+                                {{partyForm.date}}
+                                {{partyForm.date.errors}}
+                            </div>
+
+                            <div class="position people_number static" >
+                                {{partyForm.people_number.label_tag}}
+                                {{partyForm.people_number}}
+                                {{partyForm.people_number.errors}}
+                            </div>
+                            <div class="position age static" >
+                                {{partyForm.age.label_tag}}
+                                {{partyForm.age}}
+                                {{partyForm.age.errors}}
+                            </div>    
+                            <div class="position alco" >
+                                {{partyForm.alco.label_tag}}
+                                {{partyForm.alco}}
+                                {{partyForm.alco.errors}}
+                            </div>      
+                            <div class="position file" >
+                                {{partyForm.file.label_tag}}
+                                {{partyForm.file}}
+                                {{partyForm.file.errors}}
+                            </div>
+                              <div class="position address city">
+                                {{partyForm.city.label_tag}}
+                                {{partyForm.city}}
+                                {{partyForm.city.errors}}
+                            </div>
+                             <div class="position address road">
+                                {{partyForm.road.label_tag}}
+                                {{partyForm.road}}
+                                {{partyForm.road.errors}}
+                            </div>
+                            <div class="position address house_number">
+                                {{partyForm.house_number.label_tag}}
+                                {{partyForm.house_number}}
+                                {{partyForm.house_number.errors}}
+                            </div>
+                             <div class="position lat">
+                                {{partyForm.lat.label_tag}}
+                                {{partyForm.lat}}
+                                {{partyForm.lat.errors}}
+                            </div>
+                             <div class="position lng">
+                                {{partyForm.lng.label_tag}}
+                                {{partyForm.lng}}
+                                {{partyForm.lng.errors}}
+                            </div>
+                        </div>
+                        <button class="signup-btn">Create</button>
+                    </form>
+    
+                </div>
+                <div class=" parties-wrapper">
+                    <h2>Near you</h2>
+                    <div class="row-parties">
+                        <div class="parties_bgc" style="transform: translateX(0px);"></div>
+                    </div>
+                </div>
+            </section>
+        
+
+        </section>
+
+
+        <div class="pop-up hidden">
+            
+            <h2 class="pop-header"></h2>
+            <p class="pop-content"></p>
+          
+        </div>
+
+        <div class="pop-up hidden party-card">
+
+            <div class="icon"><p>X</p></div>
+            <h3 class="pop-header">Gruba biba do rana</h3>
+            <div class="desc">
+                <div class="el">
+                    <i class="fas fa-wine-glass-alt"></i>
+                    <p>{{party.alco}}</p>
+                </div>
+                <div class="el">
+                    <i class="far fa-id-card"></i>
+                    <p>{{party.age}}+</p>
+                </div>
+                <div class="el">
+                    <i class="fas fa-users"></i>
+                    <p>>{{party.people_number}}</p>
+                </div>
+            </div>
+            <p class="pop-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem consectetur quaerat, totam aliquam repellat doloremque corporis. Ex excepturi cumque exercitationem repudiandae distinctio pariatur fugit atque laboriosam. Nam voluptates ab accusantium.</p>
+            <a href={% url "map" %}>Refresh the page</a>
+        </div>
+
+        <a href={% url "map" %} class="overlay hidden"></a>
+    </div>
+   
+    <script src="https://kit.fontawesome.com/aa2fbe4dd6.js" crossorigin="anonymous"></script>
+</body>
+</html>

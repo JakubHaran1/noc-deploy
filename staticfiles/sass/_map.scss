@@ -1,0 +1,305 @@
+@use "./variables" as v;
+@use "./mixins" as m;
+.map.layout .leaflet-popup-content-wrapper {
+  word-wrap: break-word;
+  .signup-btn {
+    margin: 0.8rem 0 0.25rem;
+  }
+}
+
+.layout.map {
+  overflow: hidden;
+  .leaflet-popup-content {
+    text-align: center;
+  }
+
+  h2 {
+    padding-left: 1rem;
+  }
+  .main-header {
+    padding: 0;
+  }
+
+  #map {
+    height: 80vh;
+    border-radius: 0 0 15px;
+
+    .navbar {
+      display: none;
+    }
+    .description {
+      width: 100%;
+      color: #a1a1b5;
+      margin: 1rem 0;
+      font-size: 1.2rem;
+    }
+    h4 {
+      color: #f5f5f5;
+      font-size: 1.2rem;
+    }
+  }
+}
+
+.position.lat,
+.position.lng {
+  position: absolute;
+  opacity: 0;
+  z-index: -10000;
+}
+
+.party-creator.hidden {
+  display: none;
+  opacity: 0;
+}
+
+.party-creator {
+  background-color: v.$bg-section-2;
+  text-align: center;
+  padding: 1rem;
+  padding-top: 0;
+  border-radius: 5px;
+  background-color: #3a3459;
+  overflow: hidden;
+
+  .form-creator {
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+  }
+  .form-positions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    gap: 0.5rem;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+  }
+
+  .position {
+    grid-column: 1/4;
+    width: 100%;
+    margin-bottom: 0.7rem;
+  }
+  .position.alco {
+    grid-column: 1/2;
+  }
+  .position.description-wrapper textarea {
+    padding: 0.5rem;
+    width: 100%;
+  }
+  .position.file {
+    grid-column: 2/3;
+    position: relative;
+  }
+
+  .position.file input {
+    padding: 0;
+    width: 6.77rem;
+
+    font-size: 0;
+    &::file-selector-button {
+      font-size: initial;
+    }
+  }
+}
+
+.position .alco {
+  display: none;
+  margin-top: 0.35rem;
+
+  .position #id_alco {
+    width: auto;
+    transform: scale(1.4);
+    cursor: pointer;
+    width: auto;
+    accent-color: v.$accent-purple;
+  }
+}
+.desc {
+  @include m.description;
+}
+
+// POP UP - POCZATEK
+.pop-up {
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -100%);
+  z-index: 11111;
+  width: 75%;
+  padding: 1rem 1.5rem;
+  background-color: v.$bg-section-2;
+  text-align: center;
+  color: v.$text-secondary;
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+
+  .pop-content {
+    margin: 1rem;
+    word-wrap: break-word;
+  }
+
+  h2.pop-header {
+    text-transform: uppercase;
+    margin: 0;
+    padding: 0;
+  }
+
+  a {
+    @include m.neon-button;
+    text-decoration: none;
+  }
+}
+
+.overlay {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1111;
+  background-color: #0b0c109c;
+}
+
+.overlay.hidden {
+  display: none;
+}
+
+.pop-up.hidden {
+  display: none;
+}
+
+// MAP POP-UP
+.map-popup {
+  .leaflet-popup-content-wrapper {
+    background-color: #3a3459;
+
+    .leaflet-popup-content {
+      font-size: 1rem;
+      h4 {
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+      p {
+        margin: 0;
+      }
+    }
+  }
+}
+// POP UP - KONIEC
+
+// PARTY CARD = POCZATEK
+
+.party-card {
+  width: 50%;
+  aspect-ratio: 1/0.8;
+}
+
+@media (min-width: 390px) {
+  .form-positions {
+    width: 20rem;
+  }
+}
+@media (min-width: 620px) {
+  .party-creator {
+    .form-positions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 30rem;
+
+      .position.party_title {
+        grid-column: 1/4;
+        grid-row: 1/2;
+      }
+      .position.date {
+        grid-column: 1/2;
+      }
+      .position.people_number {
+        grid-column: 2/3;
+      }
+      .position.age {
+        grid-column: 1/2;
+      }
+      .position.city {
+        grid-column: 2/3;
+        grid-row: 4/5;
+      }
+
+      .position.road {
+        grid-column: 1/2;
+      }
+      .position.house_number {
+        grid-column: 2/3;
+      }
+
+      .position.alco {
+        grid-row: 7/8;
+      }
+      .position.file {
+        grid-row: 7/8;
+        input {
+          width: auto;
+        }
+      }
+      input {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (min-width: 1250px) {
+  .layout.map #map {
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .layout.map #map .navbar {
+    display: block;
+  }
+  .layout.map .navbar {
+    display: none;
+  }
+  .map-wrapper {
+    display: flex;
+    flex-direction: row-reverse;
+
+    .navbar,
+    .navbar.nav {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  .party-creator {
+    padding: 0;
+    margin-bottom: 1rem;
+
+    .close-creator i {
+      font-size: 1.25rem;
+      margin-top: 0.5rem;
+      margin-left: 85%;
+      color: #a1a1b5;
+      cursor: pointer;
+    }
+
+    h2 {
+      padding: 0.5rem;
+    }
+
+    .form-creator {
+      padding: 1rem;
+
+      .form-positions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: auto;
+      }
+    }
+  }
+}
