@@ -19,7 +19,7 @@ from .tokens import emailActivationToken
 from django.shortcuts import redirect, render
 from django.http import JsonResponse
 from django.urls import reverse
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMessage, get_connection
 from django.core.serializers import serialize
 
 from django.contrib.sites.shortcuts import get_current_site
@@ -36,8 +36,11 @@ from datetime import date
 import json
 import requests
 
+import os
 
 # Helping functions
+
+
 def calcAge(birth_year, birth_month, birth_day):
     today = date.today()
     age = (today.year - birth_year) - \
@@ -56,21 +59,6 @@ def reverseGeo(request):
         "lat": lat, "lon": lon, "zoom": 18, "format": "json"},).json()
 
     return JsonResponse(geoResponse, safe=False)
-
-
-def emailSending(user, mail_subject, context, htmlTemplate):
-
-    html_mail = render_to_string(
-        htmlTemplate, context)
-
-    plain_mail = strip_tags(html_mail)
-    to_addres = user.email
-
-    email = send_mail(subject=mail_subject,
-                      message=plain_mail,
-                      from_email=settings.EMAIL_HOST_USER,
-                      recipient_list=[to_addres],
-                      html_message=html_mail)
 
 
 # [${[_southWest["lat"], _northEast["lat"]]}]/[${[
@@ -187,20 +175,36 @@ class RegisterView(views.View):
         if form.is_valid():
             user = form.save(commit=False)
             user.is_active = False
-            user.save()
             user.age = calcAge(
                 user.birth.year, user.birth.month, user.birth.day)
+            user.save()
 
             page = get_current_site(request)
             mail_subject = F"Confirm your email to finish user creation"
+            from_email = "nocturno.app@gmail.com"
+            message = "email_confirm.html"
+            recipient_list = [user.email]
             mail_context = {"user": user,
                             "domain": page,
                             "subject": mail_subject,
                             "uid": urlsafe_base64_encode(force_bytes(user.pk)),
                             "token": emailActivationToken.make_token(user=user)}
+            html_mail = render_to_string(message, mail_context)
 
-            htmlTemplate = "email_confirm.html"
-            emailSending(user, mail_subject, mail_context, htmlTemplate)
+            with get_connection(
+                host=settings.RESEND_SMTP_HOST,
+                port=settings.RESEND_SMTP_PORT,
+                username=settings.RESEND_SMTP_USERNAME,
+                password=os.environ["RESEND_API_KEY"],
+                use_tls=True,
+            ) as connection:
+                r = EmailMessage(
+                    subject=mail_subject,
+                    body=html_mail,
+                    to=recipient_list,
+                    from_email=from_email,
+                    connection=connection).send()
+
             return redirect("home")
 
         return render(request, "register.html", {"form": form})
