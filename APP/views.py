@@ -185,7 +185,7 @@ class RegisterView(views.View):
             # dane maila
             current_site = get_current_site(request)
             mail_subject = "Confirm your email to finish user creation"
-            from_email = "Nocturno <noreply@nocturno.click>"
+            from_email = "noreply@nocturno.click"
             recipient_list = [user.email]
             mail_context = {
                 "user": user,
