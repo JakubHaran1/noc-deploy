@@ -43,9 +43,11 @@ python-dotenv==1.1.0
 PyYAML==6.0.3
 pyyaml_env_tag==1.1
 requests==2.32.3
+resend==2.17.0
 schedule==1.2.2
 six==1.17.0
 sqlparse==0.5.2
+typing_extensions==4.15.0
 tzdata==2024.2
 tzlocal==5.3.1
 urllib3==2.4.0

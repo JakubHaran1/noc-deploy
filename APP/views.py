@@ -32,11 +32,11 @@ from django.template.loader import render_to_string
 from django.contrib import messages
 
 
+import os
 from datetime import date
 import json
 import requests
-
-import os
+import resend
 
 # Helping functions
 
@@ -179,33 +179,40 @@ class RegisterView(views.View):
                 user.birth.year, user.birth.month, user.birth.day)
             user.save()
 
-            page = get_current_site(request)
-            mail_subject = F"Confirm your email to finish user creation"
-            from_email = "noreply@nocturno.click"
-            message = "email_confirm.html"
+            # konfiguracja Resend
+            resend.api_key = os.environ["RESEND_API_KEY"]
+
+            # dane maila
+            current_site = get_current_site(request)
+            mail_subject = "Confirm your email to finish user creation"
+            from_email = "Nocturno <noreply@nocturno.click>"
             recipient_list = [user.email]
-            mail_context = {"user": user,
-                            "domain": page,
-                            "subject": mail_subject,
-                            "uid": urlsafe_base64_encode(force_bytes(user.pk)),
-                            "token": emailActivationToken.make_token(user=user)}
-            html_mail = render_to_string(message, mail_context)
+            mail_context = {
+                "user": user,
+                "domain": current_site.domain,
+                "subject": mail_subject,
+                "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+                "token": emailActivationToken.make_token(user=user),
+            }
 
-            with get_connection(
-                host=settings.RESEND_SMTP_HOST,
-                port=settings.RESEND_SMTP_PORT,
-                username=settings.RESEND_SMTP_USERNAME,
-                password=os.environ["RESEND_API_KEY"],
-                use_tls=True,
-            ) as connection:
-                r = EmailMessage(
-                    subject=mail_subject,
-                    body=html_mail,
-                    to=recipient_list,
-                    from_email=from_email,
-                    connection=connection).send()
+            # renderowanie treści maila z HTML template
+            html_mail = render_to_string(
+                "email_confirm.html", mail_context)
 
-            return redirect("home")
+            # wysyłka maila przez Resend API
+            params = {
+                "from": from_email,
+                "to": recipient_list,
+                "subject": mail_subject,
+                "html": html_mail,
+            }
+
+            try:
+                resend.Emails.send(params)
+                print("✅ Email wysłany przez Resend")
+                return redirect("home")
+            except Exception as e:
+                print("❌ Błąd wysyłki przez Resend:", e)
 
         return render(request, "register.html", {"form": form})
 
