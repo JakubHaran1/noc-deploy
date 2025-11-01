@@ -8,7 +8,7 @@ class NocturnoEmailBackend(BaseEmailBackend):
         for mail in email_messages:
             params = {
                 "from": mail.from_email,
-                "to": mail.recipient_list,
+                "to": mail.to_email,
                 "subject": mail.subject,
                 "html": mail.html_message,
                 "message": mail.message

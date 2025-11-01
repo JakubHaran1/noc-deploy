@@ -274,7 +274,7 @@ def sendMail(request, user,  mail_subject, recipient_list, template):
         template, mail_context)
 
     send_mail(subject=mail_subject, message="reset_password.txt", html_message=html_mail,
-              from_email="noreply@nocturno.click", recipient_list=recipient_list)
+              from_email="noreply@nocturno.click", to_email=recipient_list)
 
 
 class ResetPasswordView(PasswordResetConfirmView):
