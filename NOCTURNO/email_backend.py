@@ -10,8 +10,7 @@ class NocturnoEmailBackend(BaseEmailBackend):
                 "from": mail.from_email,
                 "to": mail.to,
                 "subject": mail.subject,
-                "html": mail.html_message,
-                "message": mail.message
+                "html": mail.body
             }
 
             try:

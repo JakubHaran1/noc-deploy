@@ -197,9 +197,13 @@ class RegisterView(views.View):
             # renderowanie treści maila z HTML template
             html_mail = render_to_string(
                 "email_confirm.html", mail_context)
+            try:
+                send_mail(subject=mail_subject, message="reset_password.txt", html_message=html_mail,
+                          from_email="noreply@nocturno.click", recipient_list=recipient_list)
 
-            send_mail(subject=mail_subject, message="reset_password.txt", html_message=html_mail,
-                      from_email="noreply@nocturno.click", recipient_list=recipient_list)
+            except Exception as e:
+                PartyUser.objects.get(email=user.email).delete()
+                print(e)
 
         return render(request, "register.html", {"form": form})
 
