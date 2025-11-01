@@ -232,27 +232,27 @@ class ConfirmationView(View):
 #     template_name = "reset_password_email.html"
 
 
-# class ResetPasswordEmailView(View):
-#     def get(self, request):
-#         reset_form = PasswordResetForm()
-#         return render(request, "reset_password_email.html", {'reset_form': reset_form})
+class ResetPasswordEmailView(View):
+    def get(self, request):
+        reset_form = PasswordResetForm()
+        return render(request, "reset_password_email.html", {'reset_form': reset_form})
 
-#     def post(self, request):
-#         reset_form = PasswordResetForm(request.POST)
-#         if reset_form.is_valid():
-#             email = reset_form.cleaned_data["email"]
-#             recipent = [email]
-#             try:
-#                 user = PartyUser.objects.get(email=email)
-#                 subject = "txt/reset_password_subject.txt"
-#                 template = 'reset_password_message.html'
-#                 sendMail(request, user, subject, recipent, template)
-#             except:
-#                 reset_form.add_error(
-#                     "email", "We can't find user with this email")
-#                 return render(request, "reset_password_email.html", {"reset_form": reset_form})
+    def post(self, request):
+        reset_form = PasswordResetForm(request.POST)
+        if reset_form.is_valid():
+            email = reset_form.cleaned_data["email"]
+            recipent = [email]
+            try:
+                user = PartyUser.objects.get(email=email)
+                subject = "txt/reset_password_subject.txt"
+                template = 'reset_password_message.html'
+                sendMail(request, user, subject, recipent, template)
+            except:
+                reset_form.add_error(
+                    "email", "We can't find user with this email")
+                return render(request, "reset_password_email.html", {"reset_form": reset_form})
 
-#         return render(request, "register.html", {"reset_form": reset_form})
+        return render(request, "register.html", {"reset_form": reset_form})
 
 
 def sendMail(request, user,  mail_subject, recipient_list, template):
