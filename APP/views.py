@@ -185,7 +185,6 @@ class RegisterView(views.View):
             # dane maila
             current_site = get_current_site(request)
             mail_subject = "Confirm your email to finish user creation"
-            from_email = "noreply@nocturno.click"
             recipient_list = [user.email]
             mail_context = {
                 "user": user,
@@ -199,20 +198,8 @@ class RegisterView(views.View):
             html_mail = render_to_string(
                 "email_confirm.html", mail_context)
 
-            # wysyłka maila przez Resend API
-            params = {
-                "from": from_email,
-                "to": recipient_list,
-                "subject": mail_subject,
-                "html": html_mail,
-            }
-
-            try:
-                resend.Emails.send(params)
-                print("✅ Email wysłany przez Resend")
-                return redirect("home")
-            except Exception as e:
-                print("❌ Błąd wysyłki przez Resend:", e)
+            send_mail(subject=mail_subject, message="reset_password.txt", html_message=html_mail,
+                      from_email="noreply@nocturno.click", recipient_list=recipient_list)
 
         return render(request, "register.html", {"form": form})
 
@@ -238,14 +225,56 @@ class ConfirmationView(View):
         return redirect("register")
 
 
-class ResetPasswordEmailView(PasswordResetView):
-    email_template_name = "txt/reset_password.txt"
-    form_class = PasswordResetForm
-    from_email = settings.EMAIL_HOST_USER
-    html_email_template_name = 'reset_password_message.html'
-    subject_template_name = "txt/reset_password_subject.txt"
-    success_url = reverse_lazy("password_reset_done")
-    template_name = "reset_password_email.html"
+# class Rese2tPasswordEmailView(PasswordResetView):
+
+#     form_class = PasswordResetForm
+#     success_url = reverse_lazy("password_reset_done")
+#     template_name = "reset_password_email.html"
+
+
+# class ResetPasswordEmailView(View):
+#     def get(self, request):
+#         reset_form = PasswordResetForm()
+#         return render(request, "reset_password_email.html", {'reset_form': reset_form})
+
+#     def post(self, request):
+#         reset_form = PasswordResetForm(request.POST)
+#         if reset_form.is_valid():
+#             email = reset_form.cleaned_data["email"]
+#             recipent = [email]
+#             try:
+#                 user = PartyUser.objects.get(email=email)
+#                 subject = "txt/reset_password_subject.txt"
+#                 template = 'reset_password_message.html'
+#                 sendMail(request, user, subject, recipent, template)
+#             except:
+#                 reset_form.add_error(
+#                     "email", "We can't find user with this email")
+#                 return render(request, "reset_password_email.html", {"reset_form": reset_form})
+
+#         return render(request, "register.html", {"reset_form": reset_form})
+
+
+def sendMail(request, user,  mail_subject, recipient_list, template):
+    resend.api_key = os.environ["RESEND_API_KEY"]
+
+    # dane maila
+    current_site = get_current_site(request)
+
+    mail_context = {
+        "user": user,
+        "domain": current_site.domain,
+        "subject": mail_subject,
+        "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+        "token": emailActivationToken.make_token(user=user),
+    }
+
+    # renderowanie treści maila z HTML template
+    html_mail = render_to_string(
+        template, mail_context)
+
+    send_mail(subject=mail_subject, message="reset_password.txt", html_message=html_mail,
+              from_email="noreply@nocturno.click", recipient_list=recipient_list)
 
 
 class ResetPasswordView(PasswordResetConfirmView):

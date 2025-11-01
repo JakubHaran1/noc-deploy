@@ -17,25 +17,23 @@
                 <img src="{{request.user.avatar.url}}" alt="{{request.user.username}}'s profile image">
             </div>
 
-            <div  iv class="user-info">
-                <div class="position">
-                    <h4>Name:</h4>
-                    <p>Nicolas</p>
-                </div>
-                <div class="position">
-                    <h4>Surname:</h4>
-                    <p>Cage</p>
-                </div>
+          
               
             </div>
-            <div class="user-info">
-                <div class="position">
+            <div  iv class="user-info">
+                 <div class="position">
                     <h4>Nick:</h4>
                     <p>{{request.user.username}}</p>
                 </div>
                 <div class="position">
                     <h4>Age:</h4>
                     <p>{{request.user.return_age}}</p>
+                </div>
+            </div>
+            <div class="user-info">
+               <div class="position">
+                    <h4>Email:</h4>
+                    <p>{{request.user.email}}</p>
                 </div>
             </div>
 
