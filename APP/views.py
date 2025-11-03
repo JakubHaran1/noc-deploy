@@ -15,7 +15,7 @@ from .forms import PartyForm,  RegisterForm
 from .models import PartyModel,  PartyUser
 from .tokens import emailActivationToken
 
-
+from django.views.generic.edit import FormView
 from django.shortcuts import redirect, render
 from django.http import JsonResponse
 from django.urls import reverse
@@ -198,7 +198,7 @@ class RegisterView(views.View):
             html_mail = render_to_string(
                 "email_confirm.html", mail_context)
 
-            send_mail(subject=mail_subject, html_message=html_mail,
+            send_mail(subject=mail_subject, message="reset_password.txt", html_message=html_mail,
                       from_email="noreply@nocturno.click", recipient_list=recipient_list)
 
         return render(request, "register.html", {"form": form})
@@ -232,27 +232,34 @@ class ConfirmationView(View):
 #     template_name = "reset_password_email.html"
 
 
-class ResetPasswordEmailView(View):
-    def get(self, request):
-        reset_form = PasswordResetForm()
-        return render(request, "reset_password_email.html", {'reset_form': reset_form})
+# class ResetPasswordEmailView(View):
+#     def get(self, request):
+#         reset_form = PasswordResetForm()
+#         return render(request, "reset_password_email.html", {'reset_form': reset_form})
 
-    def post(self, request):
-        reset_form = PasswordResetForm(request.POST)
-        if reset_form.is_valid():
-            email = reset_form.cleaned_data["email"]
-            recipent = [email]
-            try:
-                user = PartyUser.objects.get(email=email)
-                subject = "txt/reset_password_subject.txt"
-                template = 'reset_password_message.html'
-                sendMail(request, user, subject, recipent, template)
-            except:
-                reset_form.add_error(
-                    "email", "We can't find user with this email")
-                return render(request, "reset_password_email.html", {"reset_form": reset_form})
+#     def post(self, request):
+#         reset_form = PasswordResetForm(request.POST)
+#         if reset_form.is_valid():
+#             email = reset_form.cleaned_data["email"]
+#             recipent = [email]
+#             try:
+#                 user = PartyUser.objects.get(email=email)
+#                 subject = "txt/reset_password_subject.txt"
+#                 template = 'reset_password_message.html'
+#                 sendMail(request, user, subject, recipent, template)
+#             except:
+#                 reset_form.add_error(
+#                     "email", "We can't find user with this email")
+#                 return render(request, "reset_password_email.html", {"reset_form": reset_form})
 
-        return render(request, "register.html", {"reset_form": reset_form})
+#         return render(request, "register.html", {"reset_form": reset_form})
+
+class ResetPasswordEmailView(FormView):
+    email_template_name = "reset_password_email.html"
+    subject_template_name = "txt/reset_password_subject.txt"
+    success_url = "login"
+    from_email = "noreply@nocturno.click"
+    html_email_template_name = "reset_password_message.html"
 
 
 def sendMail(request, user,  mail_subject, recipient_list, template):
