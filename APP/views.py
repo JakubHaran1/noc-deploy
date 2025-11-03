@@ -19,7 +19,7 @@ from django.views.generic.edit import FormView
 from django.shortcuts import redirect, render
 from django.http import JsonResponse
 from django.urls import reverse
-from django.core.mail import send_mail, EmailMessage, get_connection
+from django.core.mail import send_mail, EmailMessage, get_connection, EmailMultiAlternatives
 from django.core.serializers import serialize
 
 from django.contrib.sites.shortcuts import get_current_site
@@ -193,13 +193,24 @@ class RegisterView(views.View):
                 "uid": urlsafe_base64_encode(force_bytes(user.pk)),
                 "token": emailActivationToken.make_token(user=user),
             }
+            mail_txt = render_to_string(
+                "reset_password.txt", context=mail_context)
 
             # renderowanie treści maila z HTML template
             html_mail = render_to_string(
                 "email_confirm.html", mail_context)
 
-            send_mail(subject=mail_subject, message="reset_password.txt", html_message=html_mail,
-                      from_email="noreply@nocturno.click", recipient_list=recipient_list)
+           # Then, create a multipart email instance.
+        msg = EmailMultiAlternatives(
+            mail_subject,
+            mail_txt,
+            "noreply@nocturno.click",
+            recipient_list,
+        )
+
+        # Lastly, attach the HTML content to the email instance and send.
+        msg.attach_alternative(html_mail, "text/html")
+        msg.send()
 
         return render(request, "register.html", {"form": form})
 

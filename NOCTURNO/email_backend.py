@@ -10,7 +10,7 @@ class NocturnoEmailBackend(BaseEmailBackend):
                 "from": mail.from_email,
                 "to": mail.to,
                 "subject": mail.subject,
-                "html": mail.body
+                "html": [el[0][0] for el in mail.alternatives if el[0][1]]
             }
 
             try:

@@ -17,6 +17,7 @@ urlpatterns = [
     path("email-confirmation/<uidb64>/<token>",
          ConfirmationView.as_view(), name="activate_email"),
     path('reset-password', ResetPasswordEmailView.as_view(), name='reset-password'),
+
     path('change-password/<uidb64>/<token>',
          ResetPasswordView.as_view(), name='change-password'),
     path('reset-done', ResetDoneView.as_view(), name='password_reset_done'),
