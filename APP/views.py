@@ -255,11 +255,12 @@ class ConfirmationView(View):
 #         return render(request, "register.html", {"reset_form": reset_form})
 
 class ResetPasswordEmailView(PasswordResetView):
-    email_template_name = "reset_password_email.html"
+    template_name = "reset_password_email.html"
+    email_template_name = "txt/reset_password.txt.txt"
     subject_template_name = "txt/reset_password_subject.txt"
+    html_email_template_name = "reset_password_message.html"
     success_url = "login"
     from_email = "noreply@nocturno.click"
-    html_email_template_name = "reset_password_message.html"
 
 
 def sendMail(request, user,  mail_subject, recipient_list, template):
