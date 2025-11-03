@@ -254,7 +254,7 @@ class ConfirmationView(View):
 
 #         return render(request, "register.html", {"reset_form": reset_form})
 
-class ResetPasswordEmailView(FormView):
+class ResetPasswordEmailView(PasswordResetView):
     email_template_name = "reset_password_email.html"
     subject_template_name = "txt/reset_password_subject.txt"
     success_url = "login"
