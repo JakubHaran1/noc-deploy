@@ -21,4 +21,4 @@ class NocturnoEmailBackend(BaseEmailBackend):
             except Exception as e:
                 print("❌ Błąd wysyłki przez Resend:", e)
 
-        return super().send_messages(email_messages)
+        return len(email_messages)
