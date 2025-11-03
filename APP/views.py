@@ -193,8 +193,6 @@ class RegisterView(views.View):
                 "uid": urlsafe_base64_encode(force_bytes(user.pk)),
                 "token": emailActivationToken.make_token(user=user),
             }
-            mail_txt = render_to_string(
-                "reset_password.txt", context=mail_context)
 
             # renderowanie treści maila z HTML template
             html_mail = render_to_string(
@@ -203,7 +201,6 @@ class RegisterView(views.View):
            # Then, create a multipart email instance.
         msg = EmailMultiAlternatives(
             mail_subject,
-            mail_txt,
             "noreply@nocturno.click",
             recipient_list,
         )
