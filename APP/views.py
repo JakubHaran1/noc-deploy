@@ -267,7 +267,7 @@ class ConfirmationView(View):
 
 class ResetPasswordEmailView(PasswordResetView):
     template_name = "reset_password_email.html"
-    email_template_name = "txt/reset_password.txt.txt"
+    email_template_name = "txt/reset_password.txt"
     subject_template_name = "txt/reset_password_subject.txt"
     html_email_template_name = "reset_password_message.html"
     success_url = "login"
