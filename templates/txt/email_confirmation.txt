@@ -1,0 +1,4 @@
+    Thank you for creation your account in our app
+        👇 Confirm your email below 👇
+        http://{{domain}}{% url "activate_email" uidb64=uid token=token %}
+        Stay tune and safe 🎶🦸‍♂️

@@ -6,11 +6,16 @@ import os
 class NocturnoEmailBackend(BaseEmailBackend):
     def send_messages(self, email_messages):
         for mail in email_messages:
+            for el in mail.alternatives:
+                if el[0][1] == "text/html":
+                    html = el[0][0]
+                else:
+                    html = mail.body
             params = {
                 "from": mail.from_email,
                 "to": mail.to,
                 "subject": mail.subject,
-                "html": [el[0][0] for el in mail.alternatives if el[0][1]]
+                "html": html
             }
 
             try:
