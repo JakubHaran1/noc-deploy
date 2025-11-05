@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth import get_user_model, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetConfirmView, PasswordResetDoneView
-from django.contrib.auth.forms import PasswordResetForm, SetPasswordForm
+from django.contrib.auth.forms import SetPasswordForm
 from django.contrib.auth.decorators import login_required
 
 
@@ -15,17 +15,16 @@ from .forms import PartyForm,  RegisterForm
 from .models import PartyModel,  PartyUser
 from .tokens import emailActivationToken
 
-from django.views.generic.edit import FormView
+
 from django.shortcuts import redirect, render
 from django.http import JsonResponse
 from django.urls import reverse
-from django.core.mail import send_mail, EmailMessage, get_connection, EmailMultiAlternatives
+from django.core.mail import EmailMultiAlternatives
 from django.core.serializers import serialize
 
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.html import strip_tags
 from django.template.loader import render_to_string
 
 
@@ -201,16 +200,17 @@ class RegisterView(views.View):
                 "email_confirm.html", mail_context)
 
            # Then, create a multipart email instance.
-        msg = EmailMultiAlternatives(
-            subject=mail_subject,
-            body=html_txt,
-            from_email="noreply@nocturno.click",
-            to=recipient_list,
-        )
+            msg = EmailMultiAlternatives(
+                subject=mail_subject,
+                body=html_txt,
+                from_email="noreply@nocturno.click",
+                to=recipient_list,
+            )
 
-        # Lastly, attach the HTML content to the email instance and send.
-        msg.attach_alternative(html_mail, "text/html")
-        msg.send()
+            # Lastly, attach the HTML content to the email instance and send.
+            msg.attach_alternative(html_mail, "text/html")
+            msg.send()
+            redirect("email-notification")
 
         return render(request, "register.html", {"form": form})
 
@@ -236,64 +236,13 @@ class ConfirmationView(View):
         return redirect("register")
 
 
-# class Rese2tPasswordEmailView(PasswordResetView):
-
-#     form_class = PasswordResetForm
-#     success_url = reverse_lazy("password_reset_done")
-#     template_name = "reset_password_email.html"
-
-
-# class ResetPasswordEmailView(View):
-#     def get(self, request):
-#         reset_form = PasswordResetForm()
-#         return render(request, "reset_password_email.html", {'reset_form': reset_form})
-
-#     def post(self, request):
-#         reset_form = PasswordResetForm(request.POST)
-#         if reset_form.is_valid():
-#             email = reset_form.cleaned_data["email"]
-#             recipent = [email]
-#             try:
-#                 user = PartyUser.objects.get(email=email)
-#                 subject = "txt/reset_password_subject.txt"
-#                 template = 'reset_password_message.html'
-#                 sendMail(request, user, subject, recipent, template)
-#             except:
-#                 reset_form.add_error(
-#                     "email", "We can't find user with this email")
-#                 return render(request, "reset_password_email.html", {"reset_form": reset_form})
-
-#         return render(request, "register.html", {"reset_form": reset_form})
-
 class ResetPasswordEmailView(PasswordResetView):
     template_name = "reset_password_email.html"
     email_template_name = "txt/reset_password.txt"
     subject_template_name = "txt/reset_password_subject.txt"
     html_email_template_name = "reset_password_message.html"
-    success_url = "login"
+    success_url = "email-notification"
     from_email = "noreply@nocturno.click"
-
-
-def sendMail(request, user,  mail_subject, recipient_list, template):
-    resend.api_key = os.environ["RESEND_API_KEY"]
-
-    # dane maila
-    current_site = get_current_site(request)
-
-    mail_context = {
-        "user": user,
-        "domain": current_site.domain,
-        "subject": mail_subject,
-        "uid": urlsafe_base64_encode(force_bytes(user.pk)),
-        "token": emailActivationToken.make_token(user=user),
-    }
-
-    # renderowanie treści maila z HTML template
-    html_mail = render_to_string(
-        template, mail_context)
-
-    send_mail(subject=mail_subject, message="reset_password.txt", html_message=html_mail,
-              from_email="noreply@nocturno.click", to_email=recipient_list)
 
 
 class ResetPasswordView(PasswordResetConfirmView):
@@ -302,7 +251,7 @@ class ResetPasswordView(PasswordResetConfirmView):
     form_class = SetPasswordForm
 
 
-class ResetDoneView(PasswordResetDoneView):
+class EmailNotificationView(PasswordResetDoneView):
     template_name = "reset_password_confirmation.html"
 
 
