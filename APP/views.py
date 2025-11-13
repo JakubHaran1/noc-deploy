@@ -199,7 +199,7 @@ class RegisterView(views.View):
             html_mail = render_to_string(
                 "email_confirm.html", mail_context)
 
-           # Then, create a multipart email instance.
+           #
             msg = EmailMultiAlternatives(
                 subject=mail_subject,
                 body=html_txt,
@@ -207,10 +207,10 @@ class RegisterView(views.View):
                 to=recipient_list,
             )
 
-            # Lastly, attach the HTML content to the email instance and send.
             msg.attach_alternative(html_mail, "text/html")
             msg.send()
-            redirect("email-notification")
+
+            redirect("/email-notification/")
 
         return render(request, "register.html", {"form": form})
 

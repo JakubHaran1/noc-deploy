@@ -14,7 +14,13 @@
   }
 
   h2 {
-    padding-left: 1rem;
+    padding-bottom: 0;
+  }
+
+  .nav-header {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
   }
   .main-header {
     padding: 0;

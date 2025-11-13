@@ -27,8 +27,8 @@
 }
 .parties .party-info a {
   text-decoration: none;
-  position: relative;
   display: inline-block;
+  position: relative;
   padding: 0.5rem 0.5rem;
   font-size: 16px;
   color: #ffea00;
@@ -36,6 +36,7 @@
   border: 2px solid #ffea00;
   border-radius: 6px;
   text-transform: uppercase;
+  text-decoration: none;
   letter-spacing: 1px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -251,6 +252,7 @@ a.signup-btn {
   color: #f5f5f5;
 }
 .user-profile .user-card {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -322,7 +324,12 @@ a.signup-btn {
   text-align: center;
 }
 .layout.map h2 {
-  padding-left: 1rem;
+  padding: 2rem 0 0 1rem;
+}
+.layout.map .nav-header {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
 }
 .layout.map .main-header {
   padding: 0;
@@ -454,8 +461,8 @@ a.signup-btn {
   padding: 0;
 }
 .pop-up a {
-  position: relative;
   display: inline-block;
+  position: relative;
   padding: 0.5rem 0.5rem;
   font-size: 16px;
   color: #ffea00;
@@ -463,6 +470,7 @@ a.signup-btn {
   border: 2px solid #ffea00;
   border-radius: 6px;
   text-transform: uppercase;
+  text-decoration: none;
   letter-spacing: 1px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -640,6 +648,8 @@ a.signup-btn {
   max-width: 700px;
   color: #a1a1b5;
   margin: 2rem 0;
+  background-color: #0b0c10;
+  z-index: 1112;
 }
 .log-user h2 {
   padding: 0.5rem 0;
@@ -692,8 +702,8 @@ a.signup-btn {
 }
 .new-register a {
   margin: 1.5rem 0 0.5rem;
-  position: relative;
   display: inline-block;
+  position: relative;
   padding: 0.5rem 0.5rem;
   font-size: 16px;
   color: #ffea00;
@@ -701,6 +711,7 @@ a.signup-btn {
   border: 2px solid #ffea00;
   border-radius: 6px;
   text-transform: uppercase;
+  text-decoration: none;
   letter-spacing: 1px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -823,8 +834,8 @@ a.signup-btn {
   display: block;
 }
 .search-wrapper button {
-  position: relative;
   display: inline-block;
+  position: relative;
   padding: 0.5rem 0.5rem;
   font-size: 16px;
   color: #ffea00;
@@ -832,6 +843,7 @@ a.signup-btn {
   border: 2px solid #ffea00;
   border-radius: 6px;
   text-transform: uppercase;
+  text-decoration: none;
   letter-spacing: 1px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -980,8 +992,8 @@ a.signup-btn {
 }
 
 .signup-btn {
-  position: relative;
   display: inline-block;
+  position: relative;
   padding: 0.5rem 0.5rem;
   font-size: 16px;
   color: #ffea00;
@@ -989,6 +1001,7 @@ a.signup-btn {
   border: 2px solid #ffea00;
   border-radius: 6px;
   text-transform: uppercase;
+  text-decoration: none;
   letter-spacing: 1px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -1020,8 +1033,8 @@ a.signup-btn {
 }
 
 .add-btn {
-  position: relative;
   display: inline-block;
+  position: relative;
   padding: 0.5rem 0.5rem;
   font-size: 16px;
   color: #ffea00;
@@ -1029,6 +1042,7 @@ a.signup-btn {
   border: 2px solid #ffea00;
   border-radius: 6px;
   text-transform: uppercase;
+  text-decoration: none;
   letter-spacing: 1px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -1060,8 +1074,8 @@ a.signup-btn {
 }
 
 .add-btn {
-  position: relative;
   display: inline-block;
+  position: relative;
   padding: 0.5rem 0.5rem;
   font-size: 16px;
   color: #ffea00;
@@ -1069,6 +1083,7 @@ a.signup-btn {
   border: 2px solid #ffea00;
   border-radius: 6px;
   text-transform: uppercase;
+  text-decoration: none;
   letter-spacing: 1px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -1100,8 +1115,8 @@ a.signup-btn {
 }
 
 .delete-btn {
-  position: relative;
   display: inline-block;
+  position: relative;
   padding: 0.5rem 0.5rem;
   font-size: 16px;
   color: #ffea00;
@@ -1109,6 +1124,7 @@ a.signup-btn {
   border: 2px solid #ffea00;
   border-radius: 6px;
   text-transform: uppercase;
+  text-decoration: none;
   letter-spacing: 1px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -1153,8 +1169,8 @@ a.signup-btn {
 }
 
 .check-btn {
-  position: relative;
   display: inline-block;
+  position: relative;
   padding: 0.5rem 0.5rem;
   font-size: 16px;
   color: #ffea00;
@@ -1162,6 +1178,7 @@ a.signup-btn {
   border: 2px solid #ffea00;
   border-radius: 6px;
   text-transform: uppercase;
+  text-decoration: none;
   letter-spacing: 1px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -1256,6 +1273,11 @@ h2 {
   font-size: 2rem;
   color: #ffea00;
   text-shadow: 0 0 2px #ffea00, 0 0 5px #ffea00, 0 0 10px #ffea00, 0 0 20px #ffd900, 0 0 40px #ffd900;
+}
+
+.nav-header {
+  position: relative;
+  z-index: 11112;
 }
 
 .navbar.nav {

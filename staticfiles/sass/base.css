@@ -661,7 +661,6 @@ h2 {
 
 .layout {
   max-width: 2000px;
-  min-height: 100vh;
 }
 
 .layout.unload i {
@@ -688,7 +687,8 @@ h2 {
   padding: 0;
   font-size: 2rem;
   color: #ffea00;
-  text-shadow: 0 0 2px #ffea00, 0 0 5px #ffea00, 0 0 10px #ffea00, 0 0 20px #ffd900, 0 0 40px #ffd900;
+  text-shadow: 0 0 2px #ffea00, 0 0 5px #ffea00, 0 0 10px #ffea00,
+    0 0 20px #ffd900, 0 0 40px #ffd900;
 }
 
 .navbar.nav {
@@ -708,7 +708,8 @@ h2 {
 }
 .navbar.nav a:hover {
   color: #ffea00;
-  text-shadow: 0 0 1px #ffea00, 0 0 1px #ffea00, 0 0 2px #ffea00, 0 0 5px #ffd900, 0 0 10px #ffd900;
+  text-shadow: 0 0 1px #ffea00, 0 0 1px #ffea00, 0 0 2px #ffea00,
+    0 0 5px #ffd900, 0 0 10px #ffd900;
 }
 
 .reset-password-wrapper.register-wrapper {
@@ -741,4 +742,4 @@ h2 {
   .layout {
     width: 100%;
   }
-}/*# sourceMappingURL=base.css.map */
+} /*# sourceMappingURL=base.css.map */
