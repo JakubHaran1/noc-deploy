@@ -568,13 +568,10 @@ button {
 
 @media (min-width: 361px) {
   .log-user {
-    margin: 1rem 0;
+    margin: 1rem auto;
   }
 }
 @media (min-width: 410px) {
-  .log-user {
-    margin: 0;
-  }
   .log-user p {
     margin: 0.8rem 0;
   }
