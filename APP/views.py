@@ -210,7 +210,7 @@ class RegisterView(views.View):
             msg.attach_alternative(html_mail, "text/html")
             msg.send()
 
-            redirect("/email-notification/")
+            return render(request, "reset_password_confirmation.html")
 
         return render(request, "register.html", {"form": form})
 
