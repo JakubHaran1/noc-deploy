@@ -473,7 +473,7 @@ button {
   width: 100%;
   max-width: 700px;
   color: #a1a1b5;
-  margin: 2rem 0;
+  margin: 2rem auto;
 }
 .log-user h2 {
   padding: 0.5rem 0;
