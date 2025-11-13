@@ -640,10 +640,7 @@ a.signup-btn {
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+
   width: 100%;
   max-width: 700px;
   color: #a1a1b5;
