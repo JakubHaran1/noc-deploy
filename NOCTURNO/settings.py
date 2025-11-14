@@ -84,8 +84,23 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
+# Podstawowe
+DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+
+# Dane dostępowe do Cloudflare R2
+AWS_ACCESS_KEY_ID = "9dbc33192d8eb3a3482162ef345496b2"
+AWS_SECRET_ACCESS_KEY = "b1c6b95c4b73d3ba233cbf66a1697a32404a57b9aacba3dd3ff9359b65c3be5b"
+
+
+AWS_STORAGE_BUCKET_NAME = "nocturno-media"
+
+
+AWS_S3_ENDPOINT_URL = "https://52c2b890f8b53afb374341eaa6646845.r2.cloudflarestorage.com"
+
+
+MEDIA_URL = "https://media.nocturno.click/"
+
 MEDIA_ROOT = BASE_DIR / "media"
-MEDIA_URL = "media/"
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

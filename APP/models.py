@@ -65,20 +65,26 @@ class PartyUser(AbstractUser):
         try:
             size = (200, 200)
 
-            if not self.avatar.name.lower().endswith((".jpg", ".png", ".webp")):
+            if self.avatar and not self.avatar.name.lower().endswith((".jpg", ".png", ".webp")):
                 raise ValidationError("Wrong img type!")
 
-            file_path = os.path.split(self.avatar.path)
-
-            file_new_path = f'{self.username}/{file_path[1].split(".")[0]} + "_thumb.webp"'
-
+            # Otwórz plik używając storage (działa z R2)
+            self.avatar.open()
             with Image.open(self.avatar) as im:
                 im.thumbnail(size)
-                bufor = BytesIO()
-                im.save(bufor, "webp")
-                self.avatar.save(file_new_path, bufor, save=False)
-        except:
-            ValueError("Wrong img")
+
+                buffer = BytesIO()
+                im.save(buffer, "webp")
+                buffer.seek(0)
+
+                # nowa nazwa pliku
+                base = self.avatar.name.split("/")[-1].split(".")[0]
+                new_name = f"users_image/{self.username}/{base}_thumb.webp"
+
+                self.avatar.save(new_name, buffer, save=False)
+
+        except Exception as e:
+            print("img error:", e)
 
         super().save(*args, **kwargs)
 
@@ -116,26 +122,33 @@ class PartyModel(models.Model):
         return f"{self.party_title}: {self.date}"
 
     def save(self, *args, **kwargs):
-        file_path = os.path.split(self.file.path)
-        thumb_path = f'{self.party_title}/{file_path[1].split(".")[0]}_thumbnail.webp'
-        size = (220, 110)
-        try:
-            # Create thumbnail
-            with Image.open(self.file) as im:
-                im.thumbnail(size)
-                bufor = BytesIO()
-                im.save(bufor, 'webp')
 
-                # Save new wersion partie's banner in the base
-                self.file_thumb.save(
-                    thumb_path,
-                    bufor,
-                    save=False,
-                )
-            super().save(*args, **kwargs)
+        if self.file:
+            self.file.open()
 
-        except OSError:
-            print("can not create thumbnail for", thumb_path)
+            base = self.file.name.split("/")[-1].split(".")[0]
+            thumb_name = f"party_images/{self.party_title}/{base}_thumbnail.webp"
+
+            size = (220, 110)
+
+            try:
+                with Image.open(self.file) as im:
+                    im.thumbnail(size)
+
+                    buffer = BytesIO()
+                    im.save(buffer, "webp")
+                    buffer.seek(0)
+
+                    self.file_thumb.save(
+                        thumb_name,
+                        buffer,
+                        save=False,
+                    )
+
+            except Exception as e:
+                print("thumbnail error:", e)
+
+        super().save(*args, **kwargs)
 
 
 class PartyGroup(models.Model):
