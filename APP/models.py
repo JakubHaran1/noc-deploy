@@ -1,26 +1,17 @@
-import datetime
+import os
+from io import BytesIO
 from datetime import date
+
 from django import forms
 from django.db import models
 from django.core import validators
 from django.core.exceptions import ValidationError
-
-
+from django.core.files.base import ContentFile
 from django.utils.translation import gettext as _
 from django.utils.text import slugify
-
 from django.contrib.auth.models import AbstractUser
 
-
-import os
-from io import BytesIO
-
 from PIL import Image
-
-
-def uploadAvatar(username, file):
-    name = slugify(username)
-    return os.path.join("users_image", name, file)
 
 
 def date_checker(value):
@@ -30,14 +21,13 @@ def date_checker(value):
 
 class PartyUser(AbstractUser):
     username = models.CharField(
-        _("Name"), max_length=30, help_text="You can pass only 30 letters username.", unique=True)
+        _("Name"), max_length=30, help_text="You can pass only 30 letters username.", unique=True
+    )
     email = models.EmailField(
-        _("email field"), max_length=254, blank=False, unique=True)
-    birth = models.DateField(
-        _("birth date"))
-
-    avatar = models.FileField(
-        _("File"), upload_to=f"users_image/", blank=True)
+        _("email field"), max_length=254, blank=False, unique=True
+    )
+    birth = models.DateField(_("birth date"))
+    avatar = models.FileField(_("File"), upload_to="users_image/", blank=True)
 
     class Meta:
         verbose_name = "partyUser"
@@ -47,7 +37,7 @@ class PartyUser(AbstractUser):
         return f'{self.username},{self.email},{self.id}'
 
     def return_age(self):
-        return (date.today().year - self.birth.year)
+        return date.today().year - self.birth.year
 
     def follow(self, other_user):
         if self != other_user:
@@ -55,50 +45,43 @@ class PartyUser(AbstractUser):
                 follower=self, followed=other_user)
 
     def un_follow(self, other_user):
-
         FollowModel.objects.filter(follower=self, followed=other_user).delete()
 
     def has_friends(self):
         return self.following.exists()
 
     def save(self, *args, **kwargs):
-        try:
-            size = (200, 200)
+        if self.avatar:
+            try:
+                size = (200, 200)
+                self.avatar.open()
+                with Image.open(self.avatar) as im:
+                    im.thumbnail(size)
 
-            if self.avatar and not self.avatar.name.lower().endswith((".jpg", ".png", ".webp")):
-                raise ValidationError("Wrong img type!")
+                    buffer = BytesIO()
+                    im.save(buffer, "webp")
+                    buffer.seek(0)
 
-            # Otwórz plik używając storage (działa z R2)
-            self.avatar.open()
-            with Image.open(self.avatar) as im:
-                im.thumbnail(size)
+                    base = slugify(self.username)
+                    new_name = f"users_image/{base}_thumb.webp"
 
-                buffer = BytesIO()
-                im.save(buffer, "webp")
-                buffer.seek(0)
-
-                # nowa nazwa pliku
-                base = os.path.splitext(os.path.basename(self.avatar.name))[0]
-                new_name = f"{self.username}/{base}_thumb.webp"
-
-                self.avatar.save(new_name, buffer, save=False)
-
-        except Exception as e:
-            print("img error:", e)
+                    self.avatar.save(new_name, ContentFile(
+                        buffer.read()), save=False)
+            except Exception as e:
+                print("img error:", e)
 
         super().save(*args, **kwargs)
 
 
 class PartyModel(models.Model):
-    author = models.ForeignKey(
-        PartyUser,  on_delete=models.CASCADE)
+    author = models.ForeignKey(PartyUser, on_delete=models.CASCADE)
     party_title = models.CharField(_("Party title"), max_length=100)
     description = models.CharField(
         _("Description"), blank=False, default="brak", max_length=200)
     date = models.DateField(_("Date"), validators=[date_checker])
     creation_day = models.DateField(auto_now_add=True)
-    people_number = models.IntegerField(_("People"),
-                                        validators=[validators.MinValueValidator(1)])
+    people_number = models.IntegerField(
+        _("People"), validators=[validators.MinValueValidator(1)])
     age = models.IntegerField(_("Age"), validators=[validators.MinValueValidator(
         16, "You can't invite such young person..")])
     alco = models.BooleanField(_("Alcohol"), default=False)
@@ -122,29 +105,20 @@ class PartyModel(models.Model):
         return f"{self.party_title}: {self.date}"
 
     def save(self, *args, **kwargs):
-
         if self.file:
-            self.file.open()
-
-            base = os.path.splitext(os.path.basename(self.file.name))[0]
-            thumb_name = f"{self.party_title}/{base}_thumbnail.webp"
-
-            size = (220, 110)
-
             try:
-                with Image.open(self.file) as im:
-                    im.thumbnail(size)
+                self.file.open()
+                base = slugify(os.path.splitext(
+                    os.path.basename(self.file.name))[0])
+                thumb_name = f"party_images/{base}_thumbnail.webp"
 
+                with Image.open(self.file) as im:
+                    im.thumbnail((220, 110))
                     buffer = BytesIO()
                     im.save(buffer, "webp")
                     buffer.seek(0)
-
                     self.file_thumb.save(
-                        thumb_name,
-                        buffer,
-                        save=False,
-                    )
-
+                        thumb_name, ContentFile(buffer.read()), save=False)
             except Exception as e:
                 print("thumbnail error:", e)
 
@@ -162,11 +136,9 @@ class PartyGroup(models.Model):
 
 class FollowModel(models.Model):
     follower = models.ForeignKey(
-        PartyUser,  on_delete=models.CASCADE, related_name="following")
-
+        PartyUser, on_delete=models.CASCADE, related_name="following")
     followed = models.ForeignKey(
         PartyUser, on_delete=models.CASCADE, related_name="followers")
-
     data_followed = models.DateField(auto_now_add=True)
 
     class Meta:
