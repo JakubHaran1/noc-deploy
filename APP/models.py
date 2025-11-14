@@ -79,7 +79,7 @@ class PartyUser(AbstractUser):
 
                 # nowa nazwa pliku
                 base = self.avatar.name.split("/")[-1].split(".")[0]
-                new_name = f"users_image/{self.username}/{base}_thumb.webp"
+                new_name = f"{self.username}/{base}_thumb.webp"
 
                 self.avatar.save(new_name, buffer, save=False)
 
@@ -127,7 +127,7 @@ class PartyModel(models.Model):
             self.file.open()
 
             base = self.file.name.split("/")[-1].split(".")[0]
-            thumb_name = f"party_images/{self.party_title}/{base}_thumbnail.webp"
+            thumb_name = f"{self.party_title}/{base}_thumbnail.webp"
 
             size = (220, 110)
 
