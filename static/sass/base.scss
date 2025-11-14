@@ -2,8 +2,8 @@
 @use "./mixins" as m;
 @use "./_parties";
 @use "./_forms";
-@use "./main";
-@use "./map";
+@use "./_main";
+@use "./_map";
 @use "./login";
 @use "./register";
 @use "./buddies";
