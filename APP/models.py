@@ -119,7 +119,7 @@ class PartyModel(models.Model):
                 self.file.seek(0)
                 base = slugify(os.path.splitext(
                     os.path.basename(self.file.name))[0])
-                thumb_name = f"party_images/{base}_thumbnail.webp"
+                thumb_name = f"{base}_thumbnail.webp"
 
                 with Image.open(self.file) as im:
                     im.thumbnail((220, 110))
