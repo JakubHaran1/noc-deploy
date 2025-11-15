@@ -70,7 +70,7 @@ class PartyUser(AbstractUser):
 
                     self.avatar.save(new_name, ContentFile(
                         buffer.read()), save=False)
-                    storage_name = "party_images/" + new_name
+                    storage_name = "users_image/" + new_name
                     buffer.seek(0)
                     storage.save(storage_name, ContentFile(buffer.read()))
 
