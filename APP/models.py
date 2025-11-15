@@ -130,7 +130,8 @@ class PartyModel(models.Model):
                         thumb_name, ContentFile(buffer.read()), save=False)
 
                 buffer.seek(0)
-                storage.save(thumb_name, ContentFile(buffer.read()))
+                new_name = "https://media.nocturno.click/party_images/" + thumb_name
+                storage.save(new_name, ContentFile(buffer.read()))
 
             except Exception as e:
                 print("thumbnail error:", e)
