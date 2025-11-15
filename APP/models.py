@@ -66,13 +66,13 @@ class PartyUser(AbstractUser):
                     buffer.seek(0)
 
                     base = slugify(self.username)
-                    new_name = f"users_image/{base}_thumb.webp"
+                    new_name = f"{base}_thumb.webp"
 
                     self.avatar.save(new_name, ContentFile(
                         buffer.read()), save=False)
-
+                    storage_name = "party_images/" + new_name
                     buffer.seek(0)
-                    storage.save(new_name, ContentFile(buffer.read()))
+                    storage.save(storage_name, ContentFile(buffer.read()))
 
             except Exception as e:
                 print("img error:", e)
@@ -130,8 +130,8 @@ class PartyModel(models.Model):
                         thumb_name, ContentFile(buffer.read()), save=False)
 
                 buffer.seek(0)
-                new_name = "party_images/" + thumb_name
-                storage.save(new_name, ContentFile(buffer.read()))
+                storage_name = "party_images/" + thumb_name
+                storage.save(storage_name, ContentFile(buffer.read()))
 
             except Exception as e:
                 print("thumbnail error:", e)
