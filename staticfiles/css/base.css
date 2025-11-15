@@ -257,6 +257,7 @@ a.signup-btn {
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
+  margin-bottom: 1rem;
 }
 .user-profile .user-card .user-info {
   align-self: self-start;
