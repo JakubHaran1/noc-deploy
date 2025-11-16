@@ -15,14 +15,11 @@ class Map {
   parties_bgc = document.querySelector(".parties_bgc");
   currentParties = [];
   activeMarker = false;
-  party_btn = document.querySelector(".signup-btn");
+  party_form = document.querySelector(".form.form-creator");
 
   constructor() {
     menuFunction();
-    this.party_btn.addEventListener("click", () => {
-      this.party_btn.disabled = true;
-      this.party_btn.textContent = "Saving...";
-    });
+
     // Wyświetlanie formularza gdy nie uda się zapis
     if (!this.formSection.classList.contains("attempt"))
       this.formSection.classList.add("hidden");
@@ -78,9 +75,10 @@ class Map {
       this.last_party = e.target.closest(".party");
     });
 
-    this.party_btn.addEventListener("submit", () => {
-      this.party_btn.disabled = true;
-      this.party_btn.textContent = "Saving...";
+    this.party_form.addEventListener("submit", () => {
+      const party_btn = document.querySelector(".signup-btn");
+      party_btn.disabled = true;
+      party_btn.textContent = "Saving...";
     });
   }
 
