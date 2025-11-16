@@ -15,6 +15,7 @@ class Map {
   parties_bgc = document.querySelector(".parties_bgc");
   currentParties = [];
   activeMarker = false;
+  party_btn = document.querySelector(".signup-btn");
 
   constructor() {
     menuFunction();
