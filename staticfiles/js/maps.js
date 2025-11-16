@@ -15,11 +15,14 @@ class Map {
   parties_bgc = document.querySelector(".parties_bgc");
   currentParties = [];
   activeMarker = false;
-  party_btn = document.querySelector(".party-creator .signup-btn");
+  party_btn = document.querySelector(".signup-btn");
 
   constructor() {
     menuFunction();
-
+    this.party_btn.addEventListener("click", () => {
+      this.party_btn.disabled = true;
+      this.party_btn.textContent = "Saving...";
+    });
     // Wyświetlanie formularza gdy nie uda się zapis
     if (!this.formSection.classList.contains("attempt"))
       this.formSection.classList.add("hidden");
@@ -73,6 +76,11 @@ class Map {
       marker.openPopup();
       this.map.setView(marker._latlng);
       this.last_party = e.target.closest(".party");
+    });
+
+    this.party_btn.addEventListener("submit", () => {
+      this.party_btn.disabled = true;
+      this.party_btn.textContent = "Saving...";
     });
   }
 
@@ -466,10 +474,6 @@ class Map {
       if (Number(age) >= 18) {
         alcoField.style.display = "block";
       }
-    });
-    this.party_btn.addEventListener("click", () => {
-      this.party_btn.disabled = true;
-      this.party_btn.textContent = "Saving...";
     });
   }
 }

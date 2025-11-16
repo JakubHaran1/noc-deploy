@@ -77,6 +77,11 @@ class Map {
       this.map.setView(marker._latlng);
       this.last_party = e.target.closest(".party");
     });
+
+    this.party_btn.addEventListener("submit", () => {
+      this.party_btn.disabled = true;
+      this.party_btn.textContent = "Saving...";
+    });
   }
 
   // GŁÓWNE
