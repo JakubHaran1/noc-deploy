@@ -172,6 +172,7 @@ class RegisterView(views.View):
 
         form = RegisterForm(request.POST, request.FILES)
         if form.is_valid():
+
             user = form.save(commit=False)
             user.is_active = False
             user.age = calcAge(

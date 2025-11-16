@@ -13,12 +13,17 @@ class Map {
   parties = document.querySelector(".parties");
   last_party = "";
   parties_bgc = document.querySelector(".parties_bgc");
+  party_btn = document.querySelector(".parties_bgc");
+
   currentParties = [];
   activeMarker = false;
 
   constructor() {
     menuFunction();
-
+    this.party_btn.addEventListener("click", () => {
+      this.party_btn.disabled = true;
+      this.party_btn.textContent = "Saving...";
+    });
     // Wyświetlanie formularza gdy nie uda się zapis
     if (!this.formSection.classList.contains("attempt"))
       this.formSection.classList.add("hidden");
