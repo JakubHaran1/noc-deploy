@@ -18,7 +18,10 @@ class Map {
 
   constructor() {
     menuFunction();
-
+    this.party_btn.addEventListener("click", () => {
+      this.party_btn.disabled = true;
+      this.party_btn.textContent = "Saving...";
+    });
     // Wyświetlanie formularza gdy nie uda się zapis
     if (!this.formSection.classList.contains("attempt"))
       this.formSection.classList.add("hidden");

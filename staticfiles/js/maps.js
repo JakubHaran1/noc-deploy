@@ -13,8 +13,6 @@ class Map {
   parties = document.querySelector(".parties");
   last_party = "";
   parties_bgc = document.querySelector(".parties_bgc");
-  party_btn = document.querySelector(".parties_bgc");
-
   currentParties = [];
   activeMarker = false;
 
