@@ -76,7 +76,7 @@
   align-items: center;
   flex-shrink: 0;
   padding: 1rem;
-  margin-top: 1.25rem;
+  margin: 1.25rem auto;
   text-align: center;
   background-color: #3a3459;
   border-radius: 10px;
@@ -240,8 +240,12 @@ form button {
 .main-party a.signup-btn {
   border: 2px solid #a200ff;
   box-shadow: 0 0 8px #a200ff;
+  color: #a200ff;
   text-decoration: none;
   margin-top: 1rem;
+}
+.main-party a.signup-btn:hover {
+  color: transparent;
 }
 
 .user-profile {
