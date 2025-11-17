@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # ------------------------
 # Podstawowe ustawienia
 # ------------------------
-SECRET_KEY = 'django-insecure-...'  # zmień na swój klucz
+SECRET_KEY = 'django-insecure-...'
 DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
@@ -24,8 +24,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'storages',               # django-storages dla S3/R2
-    'APP',                    # Twoja aplikacja
+    'storages',
+    'APP',
     'django.contrib.postgres',
 ]
 
@@ -103,15 +103,15 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Media (Cloudflare R2)
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
-AWS_ACCESS_KEY_ID = "9dbc33192d8eb3a3482162ef345496b2"
-AWS_SECRET_ACCESS_KEY = "b1c6b95c4b73d3ba233cbf66a1697a32404a57b9aacba3dd3ff9359b65c3be5b"
+AWS_ACCESS_KEY_ID = os.environ("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.environ("AWS_SECRET_ACCESS_KEY")
 AWS_STORAGE_BUCKET_NAME = "nocturno-media"
 
 AWS_S3_REGION_NAME = "auto"
 AWS_S3_SIGNATURE_VERSION = "s3v4"
 AWS_S3_ADDRESSING_STYLE = "virtual"
 
-AWS_S3_ENDPOINT_URL = "https://52c2b890f8b53afb374341eaa6646845.r2.cloudflarestorage.com"
+AWS_S3_ENDPOINT_URL = os.environ("AWS_S3_ENDPOINT_URL")
 
 AWS_S3_CUSTOM_DOMAIN = "media.nocturno.click"
 MEDIA_URL = "https://media.nocturno.click/"
