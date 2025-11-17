@@ -6,9 +6,13 @@
   justify-content: center;
   align-items: center;
 }
-a.signup-btn {
-  text-decoration: none;
-  margin-top: 1rem;
+.main-party {
+  a.signup-btn {
+    border: 2px solid #a200ff;
+    box-shadow: 0 0 8px #a200ff;
+    text-decoration: none;
+    margin-top: 1rem;
+  }
 }
 .user-profile {
   width: 90%;

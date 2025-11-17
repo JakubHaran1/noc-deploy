@@ -75,7 +75,6 @@
   flex-direction: column;
   align-items: center;
   flex-shrink: 0;
-  margin: 0 auto;
   padding: 1rem;
   margin-top: 1.25rem;
   text-align: center;
@@ -238,7 +237,9 @@ form button {
   margin-top: 0.3rem;
 }
 
-a.signup-btn {
+.main-party a.signup-btn {
+  border: 2px solid #a200ff;
+  box-shadow: 0 0 8px #a200ff;
   text-decoration: none;
   margin-top: 1rem;
 }
@@ -259,9 +260,6 @@ a.signup-btn {
   gap: 1rem;
   margin-bottom: 1rem;
 }
-.user-profile .user-card .user-info {
-  align-self: self-start;
-}
 .user-profile .user-card h4 {
   margin: 0.5rem 0 0;
 }
@@ -270,6 +268,9 @@ a.signup-btn {
   -webkit-box-shadow: 0px 0px 45px -11px rgb(66, 68, 90);
   -moz-box-shadow: 0px 0px 45px -11px rgb(66, 68, 90);
   box-shadow: 0px 0px 45px -11px rgb(66, 68, 90);
+}
+.user-profile .user-card .user-info {
+  margin: auto 0;
 }
 .user-profile .friends-actions {
   display: flex;
