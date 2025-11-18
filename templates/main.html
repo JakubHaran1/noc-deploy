@@ -26,13 +26,15 @@
                     <h4>Age:</h4>
                     <p>{{request.user.return_age}}</p>
                 </div>
-            
-          
                 <div class="position">
                     <h4>Email:</h4>
                     <p>{{request.user.email}}</p>
                 </div>
-                <div class="friends-actions">
+            </div>
+
+        </div>
+
+            <div class="friends-actions">
                 <div class="acction">
                     <a href={% url "buddies" %} class="link"></a>
                     <i class="fas fa-user-friends"></i>
@@ -42,19 +44,12 @@
                     <a href="{% url "logout" %} " class="link"></a>
                     <i class="fa-solid fa-arrow-right-from-bracket logout-btn"></i>
                     <h4>Logout</h4>
+                    <p> obcaecati enim laboriosam et rem magnam ducimus suscipit harum aliquam cum voluptate dolorum beatae corrupti neque!</p>
                 </div>
                   
                 
                
             </div>
-
-
-
-            </div>
-
-        </div>
-
-            
         </div>
     </section>
 
@@ -70,7 +65,7 @@
                             {% endfor %}
                         </div>
                     </div>
-                {% else %}
+                {% else %}Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa provident incidunt, sint omnis dolore
                     <div class="party-info">
                         <p>You have to create party! 🎶🫡</p>
                         <a class="btn" href="{% url "map" %}">Create</a>
