@@ -5,14 +5,13 @@
 
 ---
 
-## 🌐 Live Demo
+ Live Demo
 
-    🔗 **Działająca wersja:** https://www.nocturno.click/
-    💻 **Repozytorium:** https://github.com/JakubHaran1/NOCTURNO.git
+     **Działająca wersja:** https://www.nocturno.click/
+     **Repozytorium:** https://github.com/JakubHaran1/NOCTURNO.git
 
 ---
-
-## 🔥 Funkcjonalności
+ Funkcjonalności
 
     - Uwierzytelnianie użytkownika
         - Potwierdzanie adresu email
@@ -29,8 +28,7 @@
     -Custom Email Backend
 
 ---
-
-## 🧠 Technologie
+Technologie
 
 | Warstwa       | Technologie                 |
 | ------------- | --------------------------- |
@@ -50,14 +48,13 @@
 
 ---
 
-## 🌐 Live Demo
+ Live Demo
 
-    🔗 **Worked version:** https://www.nocturno.click/
-    💻 **Repositiorium:** https://github.com/JakubHaran1/NOCTURNO.git
+     **Worked version:** https://www.nocturno.click/
+     **Repositiorium:** https://github.com/JakubHaran1/NOCTURNO.git
 
 ---
-
-## 🔥 Functionalitiest
+ Functionalitiest
 
     - User authentication
         - Email confirmation
@@ -75,7 +72,7 @@
 
 ---
 
-## 🧠 Technologies
+ Technologies
 
 | Layer         | Technologies                |
 | ------------- | --------------------------- |
