@@ -53,11 +53,11 @@ def reverseGeo(request):
     lon = request.GET.get('lng')
 
     geoHeader = { "User-Agent": "NocturnoApp/1.0 (admin@nocturno.click)"}
-
-    geoResponse = requests.get(url, headers=geoHeader, params={
-        "lat": lat, "lon": lon, "zoom": 18, "format": "json"},).json()
     print(response.status_code)
     print(response.text)
+    geoResponse = requests.get(url, headers=geoHeader, params={
+        "lat": lat, "lon": lon, "zoom": 18, "format": "json"},).json()
+    
     return JsonResponse(geoResponse, safe=False)
 
 
