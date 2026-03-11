@@ -1,47 +1,64 @@
-{% extends "base.html" %}
 {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Tilt+Neon&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static "css/base.css" %}" />
+    <link rel="shortcut icon" href="https://media.nocturno.click/users_image/N.png" >
+    <meta name="color-scheme" content="light dark">
+    {% block head %}{% endblock %}
+    <title>🧊 NOCTURNO 🧊</title>
+  </head>
+  <body>
+    <div class="layout ">
+      <div class="navbar nav-header">
+          <h2 class="main-header"> Nocturno </h2>
+      </div>
 
+      <div class="log-user">
+        <div class="login-wrapper">
+          <h2>Login</h2>
+          <p>Our events are for members only 👀👇</p>
+          <p>Demo: login: nocturno; password: Demo123123 </p>
+          {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+          {% endif %}
+          <form method="POST"class="form login-form ">
+              {% csrf_token %}
+              {% for field in form %}
+                <div class="position">
+                  {{field.label_tag}}
+                  {{field}}
+                  {{field.errors}}
+                </div>
+              {% endfor %}
 
+              <div class="position reset-btn">
+                <a href={% url "reset-password" %}>Reset password</a>
+              </div>
+              <button class="signup-btn">Sign in</button>
+          </form>
+            
+        </div>   
 
+        <div class="new-register">
+          <h2>Sign up!</h2>
+          <p>🚨🚨 Join us to take part in the biggest events in Europe! 🚨🚨</p>
+          <a  href={% url "register" %}>Sign up</a>
+        </div>
+      </div>
 
- {% block content %}
- 
-  <div class="log-user">
-    <div class="login-wrapper">
-      <h2>Login</h2>
-      <p>Our events are for members only 👀👇</p>
-      <p>Demo: login: nocturno; password: Demo123123 </p>
-      {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
-      {% endif %}
-      <form method="POST"class="form login-form ">
-          {% csrf_token %}
-          {% for field in form %}
-            <div class="position">
-              {{field.label_tag}}
-              {{field}}
-              {{field.errors}}
-            </div>
-          {% endfor %}
-
-          <div class="position reset-btn">
-            <a href={% url "reset-password" %}>Reset password</a>
-          </div>
-          <button class="signup-btn">Sign in</button>
-      </form>
-        
-    </div>   
-
-    <div class="new-register">
-      <h2>Sign up!</h2>
-      <p>🚨🚨 Join us to take part in the biggest events in Europe! 🚨🚨</p>
-      <a  href={% url "register" %}>Sign up</a>
+      
     </div>
-  </div>
- 
- {% endblock %}
+    <script src="https://kit.fontawesome.com/aa2fbe4dd6.js" crossorigin="anonymous"></script>
+  </body>
+</html>
 

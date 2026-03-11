@@ -8,6 +8,10 @@
 @use "./register";
 @use "./buddies";
 
+:root {
+  color-scheme: only light;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -40,7 +44,10 @@
     border-color: #ff0000;
   }
   &:hover::before {
-    box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000;
+    box-shadow:
+      0 0 10px #ff0000,
+      0 0 20px #ff0000,
+      0 0 30px #ff0000;
   }
 }
 
@@ -59,7 +66,10 @@
     border-color: #a200ff;
   }
   &:hover::before {
-    box-shadow: 0 0 10px #a200ff, 0 0 20px #a200ff, 0 0 30px #a200ff;
+    box-shadow:
+      0 0 10px #a200ff,
+      0 0 20px #a200ff,
+      0 0 30px #a200ff;
   }
 }
 
@@ -109,8 +119,11 @@ h2 {
     padding: 0;
     font-size: 2rem;
     color: v.$cta-yellow-hover;
-    text-shadow: 0 0 2px v.$cta-yellow-hover, 0 0 5px v.$cta-yellow-hover,
-      0 0 10px v.$cta-yellow-hover, 0 0 20px v.$cta-yellow,
+    text-shadow:
+      0 0 2px v.$cta-yellow-hover,
+      0 0 5px v.$cta-yellow-hover,
+      0 0 10px v.$cta-yellow-hover,
+      0 0 20px v.$cta-yellow,
       0 0 40px v.$cta-yellow;
   }
 }
@@ -132,13 +145,19 @@ h2 {
     color: v.$cta-yellow;
     font-size: 1.8rem;
     margin: 1rem;
-    transition: color 0.4s ease, text-shadow 0.4s ease;
+    transition:
+      color 0.4s ease,
+      text-shadow 0.4s ease;
   }
 
   a:hover {
     color: #ffea00;
-    text-shadow: 0 0 1px v.$cta-yellow-hover, 0 0 1px v.$cta-yellow-hover,
-      0 0 2px v.$cta-yellow-hover, 0 0 5px v.$cta-yellow, 0 0 10px v.$cta-yellow;
+    text-shadow:
+      0 0 1px v.$cta-yellow-hover,
+      0 0 1px v.$cta-yellow-hover,
+      0 0 2px v.$cta-yellow-hover,
+      0 0 5px v.$cta-yellow,
+      0 0 10px v.$cta-yellow;
   }
 }
 .reset-password-wrapper.register-wrapper {
