@@ -81,7 +81,7 @@ class Buddies {
       buddyInfo.classList.add("buddy-info");
 
       const avatar = document.createElement("img");
-      avatar.setAttribute("src", `${el.avatar}`);
+      avatar.setAttribute("src", `https://media.nocturno.click/${el.avatar}`);
       avatar.setAttribute("alt", `${el.username}`);
 
       const nick = document.createElement("h3");
