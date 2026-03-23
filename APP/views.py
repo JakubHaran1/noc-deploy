@@ -341,7 +341,7 @@ def searchingBuddie(request):
         else:
             nick_type = "username"
 
-        filter_query = f'{nick_type}__unaccent__icontains'
+        filter_query = f'{nick_type}__icontains'
 
         user = request.user
         if search_type_cookie == "Find":
