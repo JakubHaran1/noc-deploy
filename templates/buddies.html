@@ -43,7 +43,7 @@
                     {% for relation in friends_relation %}
 
                         <div class="buddy-box">
-                            <img src="{{relation.followed.avatar}}" alt="{{relation.followed.username}}">
+                            <img src="https://media.nocturno.click/{{relation.followed.avatar}}" alt="{{relation.followed.username}}">
                             <div class="buddy-info">
                                 <h3 class='nick'>{{relation.followed.username}}</h3>
                                 <form   action="{% url "add_delete_buddie" %}" method='POST'>
