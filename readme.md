@@ -1,4 +1,7 @@
 🧊 NOCTURNO 🧊 ##### PL
+    
+Aplikacja jest hostowana w ramach bezpłatnego planu, więc API może tymczasowo ograniczyć żądania przy intensywnym użytkowaniu.
+
 
     Aplikacja NOCTURNO jest platformą do tworzenia i wyszukiwania spotkań towarzyskich. Projekt powstał w ramach
     samodzielnego rozwijania umiejętności tworzenia, a także wdrożenia architektury oprogramowania.
@@ -42,6 +45,7 @@ Technologie
 ##########################################################################################################################
 
 🧊 NOCTURNO 🧊 ##### ENG
+The app is hosted on a free plan, so the API may temporarily limit requests after heavy usage.
 
     NOCTURNO app is a platform to creation and finding events. Project was created to practise abilities to
     design and develop system architecture in Django with JavaScript
@@ -80,5 +84,6 @@ Technologie
 | Frontend      | JavaScript, SCSS, CSS, HTML |
 | Deployment    | Render                      |
 | Email Backend | Resend                      |
+
 
 ---
