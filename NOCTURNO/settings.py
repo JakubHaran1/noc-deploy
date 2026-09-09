@@ -65,17 +65,19 @@ WSGI_APPLICATION = 'NOCTURNO.wsgi.application'
 # ------------------------
 # Baza danych
 # ------------------------
+
 DATABASES = {
-    'default': dj_database_url.config(
-        default='postgresql://noc_q79c_user:HetTcmEFElz6wLBTMU1yMnPQQnIxoWF7@dpg-d40nthali9vc73bqclog-a/noc_q79c',
-        conn_max_age=600
-    )
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.environ["DB_NAME"],
+        "USER": os.environ["DB_USER"],
+        "PASSWORD": os.environ["DB_PASSWORD"],
+        "HOST": os.environ["DB_HOST"],
+        "PORT": os.environ.get("DB_PORT", "5432"),
+    }
 }
 
 
-# ------------------------
-# Hasła
-# ------------------------
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -100,26 +102,12 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # ------------------------
-# Media (Cloudflare R2)
-DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
-
-AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
-AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
-AWS_STORAGE_BUCKET_NAME = "nocturno-media"
-
-AWS_S3_REGION_NAME = "auto"
-AWS_S3_SIGNATURE_VERSION = "s3v4"
-AWS_S3_ADDRESSING_STYLE = "virtual"
-
-AWS_S3_ENDPOINT_URL = os.environ.get("AWS_S3_ENDPOINT_URL")
-
-AWS_S3_CUSTOM_DOMAIN = "media.nocturno.click"
-MEDIA_URL = "https://media.nocturno.click/"
-AWS_QUERYSTRING_AUTH = False
+AWS_STORAGE_BUCKET_NAME = "twoj-bucket"
+AWS_S3_REGION_NAME = "eu-central-1"
 
 
-# ------------------------
-# Inne ustawienia
+
+
 # ------------------------
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = "APP.PartyUser"
