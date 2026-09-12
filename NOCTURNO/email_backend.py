@@ -1,7 +1,8 @@
 from django.core.mail.backends.base import BaseEmailBackend
 import resend
 import os
-
+from dotenv import load_dotenv
+load_dotenv()
 
 class NocturnoEmailBackend(BaseEmailBackend):
     def send_messages(self, email_messages):
