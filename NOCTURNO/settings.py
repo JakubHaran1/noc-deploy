@@ -96,15 +96,23 @@ USE_TZ = True
 # ------------------------
 # Pliki statyczne
 # ------------------------
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+# lub z custom domain:
+# AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+# STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
 
 # ------------------------
-AWS_STORAGE_BUCKET_NAME = "twoj-bucket"
-AWS_S3_REGION_NAME = "eu-central-1"
-
+DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+AWS_STORAGE_BUCKET_NAME = "nocturno-bucket"
+AWS_S3_REGION_NAME = "eu-north-1"
+AWS_S3_FILE_OVERWRITE = True 
+AWS_DEFAULT_ACL = None 
+AWS_S3_OBJECT_PARAMETERS = {
+"CacheControl": "max-age=86400",
+}
+AWS_LOCATION = "static"
+STATIC_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/{AWS_LOCATION}/"
 
 
 

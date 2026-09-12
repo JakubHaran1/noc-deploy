@@ -12,7 +12,6 @@ from django.utils.text import slugify
 from django.contrib.auth.models import AbstractUser
 
 from PIL import Image
-from storages.backends.s3boto3 import S3Boto3Storage
 
 
 def date_checker(value):
@@ -54,7 +53,6 @@ class PartyUser(AbstractUser):
     def save(self, *args, **kwargs):
         if self.avatar:
             try:
-                storage = S3Boto3Storage()
                 size = (200, 200)
                 self.avatar.seek(0)
 
@@ -70,9 +68,6 @@ class PartyUser(AbstractUser):
 
                     self.avatar.save(new_name, ContentFile(
                         buffer.read()), save=False)
-                    storage_name = "users_image/" + new_name
-                    buffer.seek(0)
-                    storage.save(storage_name, ContentFile(buffer.read()))
 
             except Exception as e:
                 print("img error:", e)
@@ -112,7 +107,6 @@ class PartyModel(models.Model):
         return f"{self.party_title}: {self.date}"
 
     def save(self, *args, **kwargs):
-        storage = S3Boto3Storage()
 
         if self.file:
             try:
@@ -129,9 +123,6 @@ class PartyModel(models.Model):
                     self.file_thumb.save(
                         thumb_name, ContentFile(buffer.read()), save=False)
 
-                buffer.seek(0)
-                storage_name = "party_images/" + thumb_name
-                storage.save(storage_name, ContentFile(buffer.read()))
 
             except Exception as e:
                 print("thumbnail error:", e)
