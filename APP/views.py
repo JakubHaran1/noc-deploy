@@ -193,8 +193,7 @@ class RegisterView(views.View):
             user.save()
 
             # konfiguracja Resend
-            resend.api_key = os.environ["RESEND_API_KEY"]
-
+            resend.api_key = os.getenv("RESEND_API_KEY")
             # dane maila
             current_site = get_current_site(request)
             mail_subject = "Confirm your email to finish user creation"
