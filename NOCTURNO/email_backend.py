@@ -28,7 +28,7 @@ class NocturnoEmailBackend(BaseEmailBackend):
             }
 
             try:
-                resend.api_key = os.environ["RESEND_API_KEY"]
+                resend.api_key = os.getenv("RESEND_API_KEY")
                 resend.Emails.send(params)
                 print("✅ Email wysłany przez Resend")
 
