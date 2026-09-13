@@ -6,6 +6,11 @@ load_dotenv()
 
 class NocturnoEmailBackend(BaseEmailBackend):
     def send_messages(self, email_messages):
+        api_key = os.getenv("RESEND_API_KEY")
+        if not api_key:
+            raise RuntimeError("We can not find: RESEND_API_KEY")
+
+        resend.api_key = api_key
         for mail in email_messages:
             html = ""
             for content, mimetype in mail.alternatives:
