@@ -36,7 +36,8 @@ from datetime import date
 import json
 import requests
 import resend
-
+from dotenv import load_dotenv
+load_dotenv()
 # Helping functions
 
 
