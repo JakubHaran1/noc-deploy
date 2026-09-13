@@ -255,7 +255,7 @@ class ResetPasswordEmailView(PasswordResetView):
     subject_template_name = "txt/reset_password_subject.txt"
     html_email_template_name = "reset_password_message.html"
     success_url = "email-notification"
-    from_email = "noreply@nocturno.click"
+    from_email = "noreply@nocturno.haran.cloud"
 
 
 class ResetPasswordView(PasswordResetConfirmView):

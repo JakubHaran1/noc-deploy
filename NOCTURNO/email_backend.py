@@ -21,7 +21,7 @@ class NocturnoEmailBackend(BaseEmailBackend):
                 if html is None:
                     html = mail.body
             params = {
-                "from": "nocturno.app@gmail.com",
+                "from": "noreply@nocturno.haran.cloud",
                 "to": mail.to,
                 "subject": mail.subject,
                 "html": html
