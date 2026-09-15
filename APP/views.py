@@ -240,7 +240,7 @@ class ConfirmationView(View):
             messages.add_message(request, messages.ERROR,
                                  "Chceck your email - maybe it is wrong ❌❌")
 
-            return redirect("email-change")
+            return redirect("register")
 
         if user is not None and emailActivationToken.check_token(user, token):
             user.is_active = True
