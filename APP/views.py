@@ -190,7 +190,7 @@ class RegisterView(views.View):
             user.is_active = False
             user.age = calcAge(
                 user.birth.year, user.birth.month, user.birth.day)
-           
+            user.save()
 
             # konfiguracja Resend
             resend.api_key = os.getenv("RESEND_API_KEY")
@@ -222,7 +222,7 @@ class RegisterView(views.View):
 
             msg.attach_alternative(html_mail, "text/html")
             msg.send()
-            user.save()
+            
             return render(request, "reset_password_confirmation.html")
 
         return render(request, "register.html", {"form": form})
@@ -246,6 +246,7 @@ class ConfirmationView(View):
             user.is_active = True
             user.save(update_fields=["is_active"])
             return redirect("home")
+        
         return redirect("register")
 
 

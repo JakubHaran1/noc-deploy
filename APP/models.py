@@ -28,7 +28,8 @@ class PartyUser(AbstractUser):
     )
     birth = models.DateField(_("birth date"))
     avatar = models.FileField(_("File"), upload_to="users_image/", blank=True)
-
+    is_active = models.BooleanField(default=False)
+    
     class Meta:
         verbose_name = "partyUser"
         verbose_name_plural = "partyUsers"
