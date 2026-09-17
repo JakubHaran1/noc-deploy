@@ -16,7 +16,7 @@ class Map {
   currentParties = [];
   activeMarker = false;
   party_form = document.querySelector(".form.form-creator");
-
+  new_marker = "";
   constructor() {
     menuFunction();
 
@@ -190,17 +190,16 @@ class Map {
     });
 
     // Tworzy znaczniki
-    let marker;
     if (el != false) {
       // dla generownych
-      marker = L.marker(latlng, {
+      this.new_marker = L.marker(latlng, {
         icon: myIcon,
         className: `map-popup-${el["pk"]}`,
         bubblingMouseEvents: true,
       });
     } else {
       // dla nowego - po kliknięciu użytkownika na mape
-      marker = L.marker(latlng, {
+      this.new_marker = L.marker(latlng, {
         icon: myIcon,
         className: `map-popup-${el["pk"]}`,
         bubblingMouseEvents: true,
@@ -209,11 +208,11 @@ class Map {
       this.activeMarker = marker;
     }
 
-    marker.addTo(this.map);
+    this.new_marker.addTo(this.map);
     this.currentParties.push(marker);
 
     // TWWORZENIE MAP POPUP + SCROLL DO PARTYBOX
-    marker.on("click", (e) => {
+    this.new_marker.on("click", (e) => {
       const target = this.openMapPopUp(el, e);
 
       if (this.last_party.id != target.id) {
@@ -226,7 +225,7 @@ class Map {
 
     // Tworzenie popupów
     if (el) {
-      marker._icon.setAttribute("id", `party-${el["pk"]}`);
+      this.new_marker._icon.setAttribute("id", `party-${el["pk"]}`);
       const popUpContent = safeCreate("div", { class: "map-popup-content" });
       safeCreate("h4", {}, popUpContent, el["fields"]["party_title"]);
       // dodać description
@@ -250,7 +249,7 @@ class Map {
         },
       );
 
-      marker.bindPopup(mapPopup).on("popupclose", () => {
+      this.new_marker.bindPopup(mapPopup).on("popupclose", () => {
         this.last_party.classList.remove("active");
         this.last_party = "";
       });
@@ -264,6 +263,7 @@ class Map {
     closeBtn.addEventListener("click", () =>
       this.formSection.classList.add("hidden"),
     );
+
     // Otwarcie
     this.formSection.classList.remove("hidden");
     const latlng = Object.values(e.latlng);
@@ -278,7 +278,7 @@ class Map {
       address = await this.getAdress(lat, lng);
     } catch (error) {
       this.openErrorPopUp(
-        "😭 We have problems with reverse geolocalization 😭",
+        "We have problems with reverse geolocalization 😭",
         "Try again later ⌛",
       );
     }
@@ -306,10 +306,7 @@ class Map {
       return data;
     } catch (error) {
       this.popUp;
-      this.openErrorPopUp(
-        "😭 Reverse geocoding failed! 😭",
-        "Try again later ⌛",
-      );
+      this.openErrorPopUp("Reverse geocoding failed! 😭", "Try again later ⌛");
     }
   }
 
