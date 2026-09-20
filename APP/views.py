@@ -216,7 +216,7 @@ class RegisterView(views.View):
             msg = EmailMultiAlternatives(
                 subject=mail_subject,
                 body=html_txt,
-                from_email="noreply@nocturno.click",
+                from_email="noreply@nocturno.cloud.haran",
                 to=recipient_list,
             )
 
