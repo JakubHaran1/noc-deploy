@@ -220,8 +220,9 @@ class RegisterView(views.View):
                 to=recipient_list,
             )
 
-            msg.attach_alternative(html_mail, "text/html")
+            print("REGISTER: przed msg.send()", flush=True)
             msg.send()
+            print("REGISTER: po msg.send()", flush=True)
             
             return render(request, "reset_password_confirmation.html")
 
