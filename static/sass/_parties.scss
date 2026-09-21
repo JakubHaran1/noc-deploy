@@ -21,7 +21,7 @@
     }
   }
   .party-info {
-    width: 17rem;
+    width: 15rem;
     padding: 1rem;
     margin: 0 auto;
     text-align: center;
@@ -147,7 +147,11 @@
     margin: 0 2rem;
   }
 }
-
+@media (min-width: 424px) {
+  .party-info {
+    width: 18rem;
+  }
+}
 @media (min-width: 724px) {
   .layout.map .parties_bgc {
     overflow: auto;
