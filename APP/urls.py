@@ -24,7 +24,8 @@ urlpatterns = [
 
     path('email-notification', EmailNotificationView.as_view(),
          name='email-notification'),
-     path('health', health,
+
+     path('health/', health,
          name='health'),
     path("buddies", BuddiesView.as_view(), name="buddies"),
     path("buddies/find-buddie/", searchingBuddie, name="searchBuddie"),
