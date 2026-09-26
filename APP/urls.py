@@ -1,6 +1,6 @@
 
 from django.urls import path, include
-from APP.views import reverseGeo, searchingBuddie, initFindBuddie, addDeleteBuddie, mainView, mapView, LoginUserView, RegisterView, ConfirmationView, ResetPasswordEmailView, ResetPasswordView, EmailNotificationView, BuddiesView, generateParties, partyAction, CheckBuddiesView, logoutUser
+from APP.views import reverseGeo, searchingBuddie, initFindBuddie, addDeleteBuddie, mainView, mapView, LoginUserView, RegisterView, ConfirmationView, ResetPasswordEmailView, ResetPasswordView, EmailNotificationView, BuddiesView, generateParties, partyAction, CheckBuddiesView, logoutUser,health
 
 urlpatterns = [
     path("", mainView, name="home"),
@@ -24,7 +24,8 @@ urlpatterns = [
 
     path('email-notification', EmailNotificationView.as_view(),
          name='email-notification'),
-
+     path('health', health,
+         name='health'),
     path("buddies", BuddiesView.as_view(), name="buddies"),
     path("buddies/find-buddie/", searchingBuddie, name="searchBuddie"),
     path('buddies/initial-find/<party_id>',

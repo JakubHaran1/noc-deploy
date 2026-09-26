@@ -39,7 +39,10 @@ import resend
 from dotenv import load_dotenv
 load_dotenv()
 # Helping functions
+from django.http import JsonResponse
 
+def health(request):
+    return JsonResponse({"status": "ok"})
 
 def calcAge(birth_year, birth_month, birth_day):
     today = date.today()
