@@ -13,7 +13,10 @@ load_dotenv(BASE_DIR / ".env")
 SECRET_KEY = 'django-insecure-...'
 DEBUG = True
 ALLOWED_HOSTS = ["*"]
-
+CSRF_TRUSTED_ORIGINS = [
+    "https://nocturno.haran.cloud",
+    "https://www.nocturno.haran.cloud",
+    ]
 # ------------------------
 # Aplikacje
 # ------------------------
