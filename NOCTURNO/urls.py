@@ -7,7 +7,7 @@ from APP.views import health
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("/health/",health),
+    path("/health",health),
     path("", include("APP.urls")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)\
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
