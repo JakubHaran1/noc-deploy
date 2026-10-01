@@ -222,7 +222,8 @@ class RegisterView(views.View):
                 from_email="noreply@nocturno.haran.cloud",
                 to=recipient_list,
             )
-
+            
+            msg.attach_alternative(html_mail, "text/html")
             print("REGISTER: przed msg.send()", flush=True)
             msg.send()
             print("REGISTER: po msg.send()", flush=True)
