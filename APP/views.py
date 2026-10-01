@@ -383,3 +383,7 @@ def addDeleteBuddie(request):
             user.un_follow(friend)
 
         return JsonResponse({"redirect": reverse("buddies")}, safe=False)
+
+
+def check(request):
+    return JsonResponse("check")

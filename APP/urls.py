@@ -33,4 +33,5 @@ urlpatterns = [
          CheckBuddiesView.as_view(), name="check_party"),
     path('buddies/initial-find/', initFindBuddie, name="init_find"),
     path("buddies/action-buddie/", addDeleteBuddie, name="add_delete_buddie"),
+
 ]
