@@ -51,7 +51,7 @@ class Map {
         const response = await fetch(
           `map/sign-up/${
             e.target.closest(".party").getAttribute("id").split("-")[1]
-          }`
+          }`,
         );
         if (!response.ok) throw Error("We cant add your relations");
       }
@@ -60,7 +60,7 @@ class Map {
         const response = await fetch(
           `map/sign-out/${
             e.target.closest(".party").getAttribute("id").split("-")[1]
-          }`
+          }`,
         );
         if (!response.ok) throw Error("We cant remove your relations");
       }
@@ -93,7 +93,7 @@ class Map {
         `map/generate-parties/${[_southWest["lat"], _northEast["lat"]]},${[
           _southWest["lng"],
           _northEast["lng"],
-        ]}`
+        ]}`,
       );
 
       const [participiant_parties, user_parties, parties] =
@@ -108,7 +108,7 @@ class Map {
         const party_box = safeCreate(
           "div",
           { id: `party-${el["pk"]}`, class: "party" },
-          this.parties_bgc
+          this.parties_bgc,
         );
         safeCreate(
           "p",
@@ -116,15 +116,15 @@ class Map {
             class: "date",
           },
           party_box,
-          el["fields"]["date"]
+          el["fields"]["date"],
         );
         safeCreate(
           "div",
           {
             class: "img-hero",
-            style: `background-image:url(https://media.nocturno.click/${el["fields"]["file_thumb"]})`,
+            style: `background-image:url(https://nocturno-bucket.s3.eu-north-1.amazonaws.com/${el["fields"]["file_thumb"]})`,
           },
-          party_box
+          party_box,
         );
 
         safeCreate("h4", {}, party_box, el["fields"]["party_title"]);
@@ -133,7 +133,7 @@ class Map {
           "a",
           { class: "show-users", href: `/buddies/initial-find/${el["pk"]}` },
           party_box,
-          "Show users"
+          "Show users",
         );
         let class_btn = "signup-btn";
         let content = "Sign up";
@@ -162,7 +162,7 @@ class Map {
     } catch {
       this.openErrorPopUp(
         "😭 We have problems with our database 😭",
-        "Try again later ⌛"
+        "Try again later ⌛",
       );
     }
   }
@@ -177,7 +177,7 @@ class Map {
     if (!id)
       // znajdywanie party box na podstawie id znacznika
       target = this.parties_bgc.querySelector(
-        `#${e.target._icon.getAttribute("id")}`
+        `#${e.target._icon.getAttribute("id")}`,
       );
     else target = this.parties_bgc.querySelector(id);
     return target;
@@ -234,7 +234,7 @@ class Map {
         "p",
         { class: "description" },
         popUpContent,
-        el["fields"]["description"]
+        el["fields"]["description"],
       );
       this.createDesc(el, popUpContent);
 
@@ -247,7 +247,7 @@ class Map {
           maxWidth: 320,
           className: `map-popup `,
           autoPan: false,
-        }
+        },
       );
 
       marker.bindPopup(mapPopup).on("popupclose", () => {
@@ -262,7 +262,7 @@ class Map {
     // Zamknięcie party creator
     const closeBtn = this.formSection.querySelector(".close-creator");
     closeBtn.addEventListener("click", () =>
-      this.formSection.classList.add("hidden")
+      this.formSection.classList.add("hidden"),
     );
     // Otwarcie
     this.formSection.classList.remove("hidden");
@@ -279,7 +279,7 @@ class Map {
     } catch (error) {
       this.openErrorPopUp(
         "😭 We have problems with reverse geolocalization 😭",
-        "Try again later ⌛"
+        "Try again later ⌛",
       );
     }
 
@@ -308,7 +308,7 @@ class Map {
       this.popUp;
       this.openErrorPopUp(
         "😭 Reverse geocoding failed! 😭",
-        "Try again later ⌛"
+        "Try again later ⌛",
       );
     }
   }
@@ -345,12 +345,12 @@ class Map {
           const lat = 52.237049;
           const lng = 21.017532;
           this.createMap(lat, lng);
-        }
+        },
       );
     } catch {
       this.openErrorPopUp(
         "😭 Something goes wrong 😭",
-        "We haven't acces to your geolocation ⌛"
+        "We haven't acces to your geolocation ⌛",
       );
     }
   };
@@ -389,7 +389,7 @@ class Map {
       console.log(party_parsed["pk"]);
 
       const target = this.parties_bgc.querySelector(
-        `#party-${party_parsed["pk"]}`
+        `#party-${party_parsed["pk"]}`,
       );
 
       if (this.last_party.id != target.id) {
@@ -407,7 +407,7 @@ class Map {
 
   find_marker(id) {
     const marker = this.currentParties.find(
-      (el) => el.options.className.split("-")[2] == id.split("-")[1]
+      (el) => el.options.className.split("-")[2] == id.split("-")[1],
     );
     return marker;
   }

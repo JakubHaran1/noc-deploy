@@ -19,7 +19,7 @@ class Buddies {
     // Uruchamia wyszukiwanie
     this.searchingBtn.addEventListener(
       "click",
-      this.searchingBuddie.bind(this)
+      this.searchingBuddie.bind(this),
     );
     // Dodawnie buddietgo do listy zaiobserwowanych przez zalogowanego uzytkownika
     this.searchRow.addEventListener("click", addBuddie.bind(this));
@@ -81,7 +81,10 @@ class Buddies {
       buddyInfo.classList.add("buddy-info");
 
       const avatar = document.createElement("img");
-      avatar.setAttribute("src", `https://media.nocturno.click/${el.avatar}`);
+      avatar.setAttribute(
+        "src",
+        `https://nocturno-bucket.s3.eu-north-1.amazonaws.com/${el.avatar}`,
+      );
       avatar.setAttribute("alt", `${el.username}`);
 
       const nick = document.createElement("h3");

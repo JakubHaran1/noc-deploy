@@ -122,7 +122,7 @@ class Map {
           "div",
           {
             class: "img-hero",
-            style: `background-image:url(https://media.nocturno.click/${el["fields"]["file_thumb"]})`,
+            style: `background-image:url(https://nocturno-bucket.s3.eu-north-1.amazonaws.com/${el["fields"]["file_thumb"]})`,
           },
           party_box,
         );
