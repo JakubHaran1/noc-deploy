@@ -188,31 +188,31 @@ class Map {
       iconUrl: el != false ? this.iconMarkerUrl : this.NewIconMarkerUrl,
       iconSize: [38, 95],
     });
-
+    let marker;
     // Tworzy znaczniki
     if (el != false) {
       // dla generownych
-      this.new_marker = L.marker(latlng, {
+      marker = L.marker(latlng, {
         icon: myIcon,
         className: `map-popup-${el["pk"]}`,
         bubblingMouseEvents: true,
       });
     } else {
       // dla nowego - po kliknięciu użytkownika na mape
-      this.new_marker = L.marker(latlng, {
+      marker = L.marker(latlng, {
         icon: myIcon,
         className: `map-popup-${el["pk"]}`,
         bubblingMouseEvents: true,
       });
       if (this.activeMarker) this.activeMarker.remove();
-      this.activeMarker = false;
+      this.activeMarker = marker;
     }
 
-    this.new_marker.addTo(this.map);
+    marker.addTo(this.map);
     this.currentParties.push(marker);
 
     // TWWORZENIE MAP POPUP + SCROLL DO PARTYBOX
-    this.new_marker.on("click", (e) => {
+    marker.on("click", (e) => {
       const target = this.openMapPopUp(el, e);
 
       if (this.last_party.id != target.id) {
@@ -225,7 +225,7 @@ class Map {
 
     // Tworzenie popupów
     if (el) {
-      this.new_marker._icon.setAttribute("id", `party-${el["pk"]}`);
+      marker._icon.setAttribute("id", `party-${el["pk"]}`);
       const popUpContent = safeCreate("div", { class: "map-popup-content" });
       safeCreate("h4", {}, popUpContent, el["fields"]["party_title"]);
       // dodać description
@@ -249,7 +249,7 @@ class Map {
         },
       );
 
-      this.new_marker.bindPopup(mapPopup).on("popupclose", () => {
+      marker.bindPopup(mapPopup).on("popupclose", () => {
         this.last_party.classList.remove("active");
         this.last_party = "";
       });
