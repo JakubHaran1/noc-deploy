@@ -205,7 +205,7 @@ class Map {
         bubblingMouseEvents: true,
       });
       if (this.activeMarker) this.activeMarker.remove();
-      this.activeMarker = marker;
+      this.activeMarker = false;
     }
 
     this.new_marker.addTo(this.map);
