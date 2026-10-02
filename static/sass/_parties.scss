@@ -44,7 +44,7 @@
     align-items: center;
     flex-shrink: 0;
     padding: 1rem;
-
+    margin: 1rem auto;
     text-align: center;
     background-color: #3a3459;
     border-radius: 10px;
@@ -119,12 +119,6 @@
   .parties {
     padding: 0;
     scroll-behavior: smooth;
-    .party:first-child {
-      margin-left: 1rem;
-    }
-    .party:last-child {
-      margin-right: 1rem;
-    }
 
     .party.active {
       background-color: #4a3459;
@@ -175,13 +169,6 @@
       height: 100vh;
       overflow-y: scroll;
       scrollbar-color: #1f1d39 #0b0c10;
-
-      .party:first-child {
-        margin: 1rem auto 0;
-      }
-      .party:last-child {
-        margin: 1rem auto 0;
-      }
     }
 
     .parties-wrapper {

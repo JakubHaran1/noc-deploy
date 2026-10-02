@@ -103,6 +103,10 @@
   }
 }
 
+.buddy-box:hover {
+  transform: translateY(-10px);
+}
+
 @media (min-width: 500px) {
   .search {
     width: 80%;

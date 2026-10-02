@@ -59,7 +59,10 @@
 }
 .parties .party-info a:hover::before {
   opacity: 1;
-  box-shadow: 0 0 10px #ffd900, 0 0 20px #ffd900, 0 0 30px #ffd900;
+  box-shadow:
+    0 0 10px #ffd900,
+    0 0 20px #ffd900,
+    0 0 30px #ffd900;
 }
 .parties .party-info a:hover {
   color: #2a2640;
@@ -74,6 +77,7 @@
   width: 15rem;
   justify-content: space-around;
   display: flex;
+  margin: 1rem auto;
   flex-direction: column;
   align-items: center;
   flex-shrink: 0;
@@ -81,7 +85,9 @@
   text-align: center;
   background-color: #3a3459;
   border-radius: 10px;
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
   -webkit-box-shadow: 0px 0px 37px -12px #0b0c10;
   -moz-box-shadow: 0px 0px 37px -12px #0b0c10;
   box-shadow: 0px 0px 37px -12px #0b0c10;
@@ -144,12 +150,7 @@
   padding: 0;
   scroll-behavior: smooth;
 }
-.layout.map .parties .party:first-child {
-  margin-left: 1rem;
-}
-.layout.map .parties .party:last-child {
-  margin-right: 1rem;
-}
+
 .layout.map .parties .party.active {
   background-color: #4a3459;
   transform: translateY(-10px);
@@ -506,7 +507,10 @@ form button {
 }
 .pop-up a:hover::before {
   opacity: 1;
-  box-shadow: 0 0 10px #ffd900, 0 0 20px #ffd900, 0 0 30px #ffd900;
+  box-shadow:
+    0 0 10px #ffd900,
+    0 0 20px #ffd900,
+    0 0 30px #ffd900;
 }
 .pop-up a:hover {
   color: #2a2640;
@@ -745,7 +749,10 @@ form button {
 }
 .new-register a:hover::before {
   opacity: 1;
-  box-shadow: 0 0 10px #ffd900, 0 0 20px #ffd900, 0 0 30px #ffd900;
+  box-shadow:
+    0 0 10px #ffd900,
+    0 0 20px #ffd900,
+    0 0 30px #ffd900;
 }
 .new-register a:hover {
   color: #2a2640;
@@ -876,7 +883,10 @@ form button {
 }
 .search-wrapper button:hover::before {
   opacity: 1;
-  box-shadow: 0 0 10px #ffd900, 0 0 20px #ffd900, 0 0 30px #ffd900;
+  box-shadow:
+    0 0 10px #ffd900,
+    0 0 20px #ffd900,
+    0 0 30px #ffd900;
 }
 .search-wrapper button:hover {
   color: #2a2640;
@@ -1043,7 +1053,10 @@ form button {
 }
 .signup-btn:hover::before {
   opacity: 1;
-  box-shadow: 0 0 10px #ffd900, 0 0 20px #ffd900, 0 0 30px #ffd900;
+  box-shadow:
+    0 0 10px #ffd900,
+    0 0 20px #ffd900,
+    0 0 30px #ffd900;
 }
 .signup-btn:hover {
   color: #2a2640;
@@ -1084,7 +1097,10 @@ form button {
 }
 .add-btn:hover::before {
   opacity: 1;
-  box-shadow: 0 0 10px #ffd900, 0 0 20px #ffd900, 0 0 30px #ffd900;
+  box-shadow:
+    0 0 10px #ffd900,
+    0 0 20px #ffd900,
+    0 0 30px #ffd900;
 }
 .add-btn:hover {
   color: #2a2640;
@@ -1125,7 +1141,10 @@ form button {
 }
 .add-btn:hover::before {
   opacity: 1;
-  box-shadow: 0 0 10px #ffd900, 0 0 20px #ffd900, 0 0 30px #ffd900;
+  box-shadow:
+    0 0 10px #ffd900,
+    0 0 20px #ffd900,
+    0 0 30px #ffd900;
 }
 .add-btn:hover {
   color: #2a2640;
@@ -1166,7 +1185,10 @@ form button {
 }
 .delete-btn:hover::before {
   opacity: 1;
-  box-shadow: 0 0 10px #ffd900, 0 0 20px #ffd900, 0 0 30px #ffd900;
+  box-shadow:
+    0 0 10px #ffd900,
+    0 0 20px #ffd900,
+    0 0 30px #ffd900;
 }
 .delete-btn:hover {
   color: #2a2640;
@@ -1186,7 +1208,10 @@ form button {
   border-color: #ff0000;
 }
 .delete-btn:hover::before {
-  box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000;
+  box-shadow:
+    0 0 10px #ff0000,
+    0 0 20px #ff0000,
+    0 0 30px #ff0000;
 }
 
 .check-btn {
@@ -1222,7 +1247,10 @@ form button {
 }
 .check-btn:hover::before {
   opacity: 1;
-  box-shadow: 0 0 10px #ffd900, 0 0 20px #ffd900, 0 0 30px #ffd900;
+  box-shadow:
+    0 0 10px #ffd900,
+    0 0 20px #ffd900,
+    0 0 30px #ffd900;
 }
 .check-btn:hover {
   color: #2a2640;
@@ -1242,7 +1270,10 @@ form button {
   border-color: #a200ff;
 }
 .check-btn:hover::before {
-  box-shadow: 0 0 10px #a200ff, 0 0 20px #a200ff, 0 0 30px #a200ff;
+  box-shadow:
+    0 0 10px #a200ff,
+    0 0 20px #a200ff,
+    0 0 30px #a200ff;
 }
 
 body {
@@ -1294,7 +1325,12 @@ h2 {
   padding: 0;
   font-size: 2rem;
   color: #ffea00;
-  text-shadow: 0 0 2px #ffea00, 0 0 5px #ffea00, 0 0 10px #ffea00, 0 0 20px #ffd900, 0 0 40px #ffd900;
+  text-shadow:
+    0 0 2px #ffea00,
+    0 0 5px #ffea00,
+    0 0 10px #ffea00,
+    0 0 20px #ffd900,
+    0 0 40px #ffd900;
 }
 
 .nav-header {
@@ -1315,11 +1351,18 @@ h2 {
   color: #ffd900;
   font-size: 1.8rem;
   margin: 1rem;
-  transition: color 0.4s ease, text-shadow 0.4s ease;
+  transition:
+    color 0.4s ease,
+    text-shadow 0.4s ease;
 }
 .navbar.nav a:hover {
   color: #ffea00;
-  text-shadow: 0 0 1px #ffea00, 0 0 1px #ffea00, 0 0 2px #ffea00, 0 0 5px #ffd900, 0 0 10px #ffd900;
+  text-shadow:
+    0 0 1px #ffea00,
+    0 0 1px #ffea00,
+    0 0 2px #ffea00,
+    0 0 5px #ffd900,
+    0 0 10px #ffd900;
 }
 
 .reset-password-wrapper.register-wrapper {
