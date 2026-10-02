@@ -83,7 +83,7 @@ class Buddies {
       const avatar = document.createElement("img");
       avatar.setAttribute(
         "src",
-        `https://nocturno-bucket.s3.eu-north-1.amazonaws.com/${el.avatar}`,
+        `https://nocturno-bucket.s3.eu-north-1.amazonaws.com/static/${el.avatar}`,
       );
       avatar.setAttribute("alt", `${el.username}`);
 
