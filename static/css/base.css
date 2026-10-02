@@ -242,9 +242,6 @@ form button {
   text-decoration: none;
   margin-top: 1rem;
 }
-.main-party a.signup-btn:hover {
-  color: transparent;
-}
 
 .user-profile {
   width: 90%;
