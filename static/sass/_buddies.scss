@@ -95,8 +95,12 @@
     color: v.$text-secondary;
   }
 
+  img {
+    width: 40%;
+  }
+
   button {
-    width: 5rem;
+    width: 100%;
     font-size: 0.8rem;
     padding: 0.25rem;
     margin-top: 1rem;
